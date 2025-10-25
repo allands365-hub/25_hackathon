@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hackathon Project
+
+A Next.js project with React, TypeScript, Tailwind CSS, Supabase, and Groq AI integration.
+
+## Tech Stack
+
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript
+- **UI Components**: shadcn/ui + Tailwind CSS v4
+- **Database**: Supabase (PostgreSQL)
+- **AI/LLM**: Groq (ultra-fast LLM inference)
+- **API**: REST API (Next.js API Routes)
+
+## Project Structure
+
+```
+├── app/                  # Next.js app router pages
+│   ├── api/             # API routes
+│   │   ├── groq/        # Groq AI endpoints
+│   │   └── example/     # Example CRUD endpoints
+│   └── components/      # React components
+├── lib/
+│   ├── supabase/        # Supabase client configurations
+│   │   ├── client.ts    # Client-side Supabase instance
+│   │   └── server.ts    # Server-side Supabase instance
+│   ├── groq/            # Groq AI utilities
+│   │   ├── client.ts    # Groq client & models
+│   │   └── utils.ts     # AI helper functions
+│   └── utils/           # Utility functions
+│       └── api.ts       # API helpers
+├── hooks/               # React hooks
+│   ├── useSupabase.ts  # Supabase data hooks
+│   └── useGroq.ts      # Groq AI hooks
+├── types/               # TypeScript type definitions
+│   └── database.ts      # Database types
+├── docs/                # Documentation
+│   ├── HACKATHON_DAY_GUIDE.md
+│   ├── GROQ_GUIDE.md
+│   ├── SETUP_COMPLETE.md
+│   └── ...
+├── public/              # Static assets
+└── .env.local          # Environment variables (DO NOT COMMIT)
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure Environment Variables
+
+1. Copy `.env.example` to `.env.local`
+2. Get your Supabase credentials from [Supabase Dashboard](https://app.supabase.com)
+3. Get your Groq API key from [Groq Console](https://console.groq.com)
+4. Update `.env.local` with your actual values:
+   - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon/public key
+   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key (server-side only)
+   - `GROQ_API_KEY`: Your Groq API key
+
+### 3. Set up Supabase MCP (Optional)
+
+See [docs/MCP_SETUP.md](./docs/MCP_SETUP.md) for detailed instructions on configuring Supabase MCP in Claude Code.
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see your app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quick Development Tips
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Using Supabase Client
 
-## Learn More
+**Client-side (in React components):**
+```typescript
+import { supabase } from '@/lib/supabase/client';
 
-To learn more about Next.js, take a look at the following resources:
+const { data, error } = await supabase
+  .from('your_table')
+  .select('*');
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Server-side (in API routes or server components):**
+```typescript
+import { supabaseAdmin } from '@/lib/supabase/server';
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+const { data, error } = await supabaseAdmin
+  .from('your_table')
+  .select('*');
+```
 
-## Deploy on Vercel
+### Creating API Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create files in `app/api/[route]/route.ts`:
+```typescript
+import { NextResponse } from 'next/server';
+import { supabaseAdmin } from '@/lib/supabase/server';
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export async function GET() {
+  const { data, error } = await supabaseAdmin
+    .from('your_table')
+    .select('*');
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ data });
+}
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## Documentation
+
+### 📅 For Hackathon Day
+- **[docs/HACKATHON_DAY_GUIDE.md](./docs/HACKATHON_DAY_GUIDE.md)** - ⭐ START HERE on hackathon day!
+- **[docs/GROQ_GUIDE.md](./docs/GROQ_GUIDE.md)** - Complete guide to using Groq AI
+- **[docs/SHADCN_QUICK_REFERENCE.md](./docs/SHADCN_QUICK_REFERENCE.md)** - shadcn/ui components reference
+- **[docs/HACKATHON_GUIDE.md](./docs/HACKATHON_GUIDE.md)** - Quick reference patterns
+
+### ✅ Setup Complete
+- **[docs/SETUP_COMPLETE.md](./docs/SETUP_COMPLETE.md)** - Final setup status (everything is ready!)
+- **[docs/SETUP_CHECKLIST.md](./docs/SETUP_CHECKLIST.md)** - What's been completed
+
+### 🔧 Optional/Reference
+- **[docs/MCP_SETUP.md](./docs/MCP_SETUP.md)** - Supabase MCP configuration (optional)
+
+## Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
+- [shadcn/ui Documentation](https://ui.shadcn.com)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Groq Documentation](https://console.groq.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
