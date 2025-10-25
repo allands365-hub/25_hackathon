@@ -1,8 +1,10 @@
 # Python dependencies for BuildAI Arena
 # This project is primarily Node.js/Next.js, but includes some Python utilities
 
-# No Python dependencies currently required
-# This file is included for completeness and future Python integrations
+# Security scanning tools
+ggshield>=1.43.0
+truffleHog>=2.2.1
+detect-secrets>=1.5.0
 
 # If Python scripts are added in the future, add dependencies here
 # Example:
