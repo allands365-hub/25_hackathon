@@ -268,7 +268,7 @@ export default function ReviewSubmissionPage() {
               <CardTitle>Project Summary</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap">
+              <p className="text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap break-words overflow-hidden">
                 {submission.summary}
               </p>
             </CardContent>

@@ -93,7 +93,7 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
           setIsLoading(false);
         }}
         onLoad={() => setIsLoading(false)}
-        unoptimized={false}
+        unoptimized={true}
       />
       {isLoading && (
         <div

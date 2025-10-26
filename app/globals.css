@@ -8,8 +8,8 @@ html:not(.dark) {
 
 html.light body,
 html:not(.dark) body {
-  background-color: white;
-  color: black;
+  background-color: white !important;
+  color: black !important;
 }
 
 /* Dark mode styles */

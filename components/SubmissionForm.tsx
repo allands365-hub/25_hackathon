@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,6 +57,15 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<Partial<SubmissionFormData>>({});
+
+  // If user is not authenticated and tries to open the form, redirect to sign in
+  useEffect(() => {
+    if (isOpen && !isAuthenticated) {
+      onClose();
+      toast.error('Please sign in to submit a project');
+      router.push('/auth/signin');
+    }
+  }, [isOpen, isAuthenticated, onClose, router]);
 
   const form = useForm<SubmissionFormData>({
     resolver: zodResolver(submissionSchema),

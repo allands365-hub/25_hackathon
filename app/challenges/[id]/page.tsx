@@ -155,14 +155,30 @@ export default function ChallengeDetailPage() {
 
         {/* Submit Button */}
         <div className="flex justify-center">
-          <Button
-            size="lg"
-            className="px-8"
-            onClick={() => setIsDialogOpen(true)}
-            data-testid="submit-project-btn"
-          >
-            Submit Your Project
-          </Button>
+          {isAuthenticated ? (
+            <Button
+              size="lg"
+              className="px-8"
+              onClick={() => setIsDialogOpen(true)}
+              data-testid="submit-project-btn"
+            >
+              Submit Your Project
+            </Button>
+          ) : (
+            <Card className="p-6 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
+              <div className="text-center space-y-4">
+                <p className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                  Sign in to submit your project
+                </p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  You need to sign in to participate in this challenge
+                </p>
+                <Button asChild size="lg" className="px-8">
+                  <Link href="/auth/signin">Sign In</Link>
+                </Button>
+              </div>
+            </Card>
+          )}
         </div>
 
         {/* Multi-step Submission Form */}

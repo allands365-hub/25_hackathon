@@ -331,7 +331,7 @@ export default function SubmissionDetailPage() {
             <div>
               <label className="text-sm font-medium mb-2 block">Project Summary</label>
               <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg">
-                <p className="whitespace-pre-wrap text-zinc-700 dark:text-zinc-300">
+                <p className="whitespace-pre-wrap break-words overflow-hidden text-zinc-700 dark:text-zinc-300">
                   {submission.summary}
                 </p>
               </div>

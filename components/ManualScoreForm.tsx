@@ -87,6 +87,14 @@ export function ManualScoreForm({
     setIsSubmitting(true);
 
     try {
+      // Get session token for authentication
+      const { supabase } = await import('@/lib/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        throw new Error('Not authenticated. Please sign in again.');
+      }
+
       const reviewData = {
         submission_id: submissionId,
         criterion_scores: criterionScores,
@@ -95,7 +103,10 @@ export function ManualScoreForm({
 
       const response = await fetch('/api/manual-review', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify(reviewData),
       });
 

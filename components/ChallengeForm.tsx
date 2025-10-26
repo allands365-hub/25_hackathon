@@ -94,6 +94,9 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
   const watchedValues = watch();
   const totalWeight = watchedValues.criteria?.reduce((sum, c) => sum + (c.weight || 0), 0) || 0;
 
+  // Disable Next button on Step 3 if weights don't equal 100%
+  const isNextDisabled = currentStep === 3 && totalWeight !== 100;
+
   const handleNext = async () => {
     let isValid = false;
 
@@ -105,14 +108,16 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
         isValid = await trigger('problemStatement');
         break;
       case 3:
-        isValid = await trigger('criteria');
-        if (isValid && totalWeight !== 100) {
+        // For Step 3, only check if weights sum to 100%
+        if (totalWeight !== 100) {
           toast.error('Criterion weights must sum to exactly 100%');
           return;
         }
+        isValid = true;
         break;
       case 4:
-        isValid = await trigger();
+        // Step 4: No validation needed, allow submission
+        isValid = true;
         break;
     }
 
@@ -136,6 +141,14 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
 
     try {
       const formData = watchedValues;
+
+      // Get session token for authentication
+      const { supabase } = await import('@/lib/supabase/client');
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        throw new Error('Not authenticated. Please sign in again.');
+      }
 
       // Format data for API
       const challengeData = {
@@ -161,7 +174,10 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
 
       const response = await fetch(endpoint, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify(challengeData),
       });
 
@@ -554,7 +570,12 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
           Back
         </Button>
 
-        <Button type="button" onClick={handleNext} disabled={isSubmitting}>
+        <Button 
+          type="button" 
+          onClick={handleNext} 
+          disabled={isSubmitting || isNextDisabled}
+          title={isNextDisabled ? `Weights must sum to exactly 100%. Current total: ${totalWeight}%` : undefined}
+        >
           {isSubmitting ? (
             'Saving...'
           ) : currentStep === 4 ? (

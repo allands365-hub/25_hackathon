@@ -128,10 +128,10 @@ export function ReviewHistory({
             <div className="flex items-start justify-between gap-4">
               {/* Reviewer Info */}
               <div className="flex items-center gap-3">
-                {review.reviewer.avatar_url ? (
+                {review.reviewer?.avatar_url ? (
                   <Image
                     src={review.reviewer.avatar_url}
-                    alt={review.reviewer.username}
+                    alt={review.reviewer.username || 'Reviewer'}
                     width={40}
                     height={40}
                     className="rounded-full"
@@ -143,8 +143,8 @@ export function ReviewHistory({
                 )}
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-semibold">{review.reviewer.username}</p>
-                    {review.reviewer.company_name && (
+                    <p className="font-semibold">{review.reviewer?.username || 'Unknown Reviewer'}</p>
+                    {review.reviewer?.company_name && (
                       <Badge variant="outline" className="text-xs">
                         {review.reviewer.company_name}
                       </Badge>
@@ -171,16 +171,16 @@ export function ReviewHistory({
               <div className="mt-3 pt-3 border-t border-zinc-200 dark:border-zinc-700">
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-zinc-600 dark:text-zinc-400">Reviewing submission by:</p>
-                  {review.submission.user.avatar_url ? (
+                  {review.submission?.user?.avatar_url ? (
                     <Image
                       src={review.submission.user.avatar_url}
-                      alt={review.submission.user.username}
+                      alt={review.submission.user.username || 'Builder'}
                       width={20}
                       height={20}
                       className="rounded-full"
                     />
                   ) : null}
-                  <p className="text-sm font-medium">{review.submission.user.username}</p>
+                  <p className="text-sm font-medium">{review.submission?.user?.username || 'Unknown Builder'}</p>
                 </div>
               </div>
             )}
