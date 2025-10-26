@@ -8,8 +8,8 @@ Create a file named `.env.local` in the root directory with the following conten
 
 ```env
 # Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://qbbdfgszjgfteusxlykl.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiYmRmZ3N6amdmdGV1c3hseWtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMjI1MDUsImV4cCI6MjA3Njg5ODUwNX0.e7a-YEM0dPwq4JwqCrZ9163gT6gTGvsvc4dQ4RTKeQ0
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
 
 # Groq AI Configuration
