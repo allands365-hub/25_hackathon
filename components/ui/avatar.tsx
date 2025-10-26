@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface AvatarProps {
   src?: string | null;
@@ -20,6 +20,17 @@ const sizeClasses = {
 export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Reset states when src changes
+  useEffect(() => {
+    if (src) {
+      setIsLoading(true);
+      setImageError(false);
+    } else {
+      setIsLoading(false);
+      setImageError(true);
+    }
+  }, [src]);
   
   // Get initials from alt text (username or name)
   const getInitials = (name: string) => {
@@ -77,13 +88,16 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
         width={size === 'sm' ? 32 : size === 'md' ? 48 : size === 'lg' ? 80 : 120}
         height={size === 'sm' ? 32 : size === 'md' ? 48 : size === 'lg' ? 80 : 120}
         className={`rounded-full ${className}`}
-        onError={() => setImageError(true)}
+        onError={() => {
+          setImageError(true);
+          setIsLoading(false);
+        }}
         onLoad={() => setIsLoading(false)}
-        style={{ display: isLoading ? 'none' : 'block' }}
+        unoptimized={false}
       />
       {isLoading && (
         <div
-          className={`${sizeClass} ${avatarBgColor} rounded-full flex items-center justify-center text-white font-bold ${className}`}
+          className={`absolute inset-0 ${sizeClass} ${avatarBgColor} rounded-full flex items-center justify-center text-white font-bold`}
         >
           {initials}
         </div>
