@@ -102,3 +102,6 @@ Thumbs.db
 dist/
 build/
 out/
+
+# misc documentation (local reference only)
+Misc_doc/
