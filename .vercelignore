@@ -1,0 +1,50 @@
+# Vercel ignore file - files and directories to exclude from deployment
+
+# Build artifacts (Vercel rebuilds these)
+.next/
+node_modules/
+
+# Testing
+test-results/
+playwright-report/
+.coverage/
+
+# IDE and development
+.bmad-core/
+.cursor/
+.vscode/
+.idea/
+
+# Local development files
+*.local
+.env.local
+
+# Documentation (already in gitignore)
+Misc_doc/
+screenshots/
+web-bundles/
+
+# Debug scripts (already in gitignore)
+test-*.js
+debug-*.js
+check-*.js
+
+# Python (not used in production)
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+
+# Scripts (keep migration files, ignore utility scripts)
+scripts/**/*.js
+!scripts/migrations/**/*.sql
+
