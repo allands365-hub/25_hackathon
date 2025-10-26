@@ -2,12 +2,12 @@
 # This project is primarily Node.js/Next.js, but includes some Python utilities
 
 # Security scanning tools
-ggshield>=1.43.0
-truffleHog>=2.2.1
-detect-secrets>=1.5.0
+ggshield>=1.50.0
+truffleHog>=5.0.0
+detect-secrets>=1.6.0
 
 # If Python scripts are added in the future, add dependencies here
 # Example:
-# requests>=2.31.0
-# python-dotenv>=1.0.0
-# supabase>=2.0.0
+# requests>=2.32.3
+# python-dotenv>=1.0.1
+# supabase>=2.10.1

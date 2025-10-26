@@ -1,49 +1,104 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Target, Code, Trophy, Users, Calendar, Award } from 'lucide-react';
+import { useAuth } from '@/lib/auth/hooks';
 
 export default function Home() {
+  const { isAuthenticated, profile, isSponsor, isBuilder } = useAuth();
+  const router = useRouter();
+  
+  // Redirect authenticated users to their dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (isSponsor) {
+        router.push('/sponsor');
+      } else if (isBuilder) {
+        router.push('/challenges');
+      }
+    }
+  }, [isAuthenticated, isSponsor, isBuilder, router]);
+
+  if (isAuthenticated) {
+    if (isSponsor) {
+      return (
+        <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-black dark:to-zinc-900 flex items-center justify-center">
+          <div className="text-center space-y-4">
+            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Redirecting to Sponsor Dashboard...</h1>
+            <p className="text-zinc-600 dark:text-zinc-400">
+              <Link href="/sponsor" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                Click here if you're not redirected automatically
+              </Link>
+            </p>
+          </div>
+        </div>
+      );
+    } else if (isBuilder) {
+      return (
+        <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-black dark:to-zinc-900 flex items-center justify-center">
+          <div className="text-center space-y-4">
+            <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Redirecting to Challenges...</h1>
+            <p className="text-zinc-600 dark:text-zinc-400">
+              <Link href="/challenges" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
+                Click here if you're not redirected automatically
+              </Link>
+            </p>
+          </div>
+        </div>
+      );
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white dark:from-black dark:to-zinc-900">
+    <div className="min-h-screen bg-gradient-to-b from-zinc-100 to-white dark:from-zinc-950 dark:to-black">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-20 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight">
-              <span className="block">Prove Your AI Skills.</span>
-              <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight" data-testid="hero-heading">
+              <span className="block text-zinc-900 dark:text-zinc-100" data-testid="hero-title">Prove Your AI Skills.</span>
+              <span className="block text-zinc-900 dark:text-zinc-100" data-testid="hero-subtitle">
                 Get Hired.
               </span>
             </h1>
-            <p className="max-w-2xl mx-auto text-xl text-zinc-600 dark:text-zinc-400">
+            <p className="max-w-2xl mx-auto text-xl text-zinc-600 dark:text-zinc-400" data-testid="hero-description">
               The competitive arena where AI builders submit projects to real challenges,
               get evaluated by LLMs in seconds, and rise on the leaderboard to catch the
               attention of top companies.
             </p>
             <div className="flex gap-4 justify-center pt-4">
-              <Button asChild size="lg" className="text-lg px-8 py-6">
+              <Button asChild size="lg" className="text-lg px-8 py-6" data-testid="browse-challenges-btn">
                 <Link href="/challenges">Browse Challenges</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
-                <Link href="/auth/signin">Sign In with GitHub</Link>
-              </Button>
+              {isAuthenticated ? (
+                <Button asChild size="lg" className="text-lg px-8 py-6" data-testid="my-profile-btn">
+                  <Link href="/profile">My Profile</Link>
+                </Button>
+              ) : (
+                <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6" data-testid="hero-signin-btn">
+                  <Link href="/auth/signin">Sign In</Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-white dark:bg-zinc-950">
+      <section className="py-20 bg-white dark:bg-zinc-950" data-testid="how-it-works-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-zinc-900 dark:text-zinc-100" data-testid="how-it-works-heading">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-8 text-center">
               <div className="flex justify-center mb-4">
                 <Target className="h-12 w-12 text-blue-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Choose a Challenge</h3>
+              <h3 className="text-xl font-bold mb-3 text-zinc-900 dark:text-zinc-100">Choose a Challenge</h3>
               <p className="text-zinc-600 dark:text-zinc-400">
                 Browse real-world AI product challenges posted by companies looking for talent.
               </p>
@@ -52,7 +107,7 @@ export default function Home() {
               <div className="flex justify-center mb-4">
                 <Code className="h-12 w-12 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Build & Submit Your Project</h3>
+              <h3 className="text-xl font-bold mb-3 text-zinc-900 dark:text-zinc-100">Build & Submit Your Project</h3>
               <p className="text-zinc-600 dark:text-zinc-400">
                 Create your solution, push to GitHub, and submit with a pitch deck and demo video.
               </p>
@@ -61,7 +116,7 @@ export default function Home() {
               <div className="flex justify-center mb-4">
                 <Trophy className="h-12 w-12 text-yellow-600" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Get Evaluated & Ranked</h3>
+              <h3 className="text-xl font-bold mb-3 text-zinc-900 dark:text-zinc-100">Get Evaluated & Ranked</h3>
               <p className="text-zinc-600 dark:text-zinc-400">
                 Receive instant AI-powered evaluation and compete for the top spot on the leaderboard.
               </p>
@@ -71,9 +126,9 @@ export default function Home() {
       </section>
 
       {/* Featured Challenges */}
-      <section className="py-20">
+      <section className="py-20" data-testid="featured-challenges-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Challenges</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-zinc-900 dark:text-zinc-100" data-testid="featured-challenges-heading">Featured Challenges</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -136,19 +191,19 @@ export default function Home() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-20 bg-zinc-50 dark:bg-zinc-900">
+      <section className="py-20 bg-zinc-50 dark:bg-zinc-900" data-testid="stats-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-5xl font-bold text-blue-600">1,247</div>
+            <div data-testid="stat-builders">
+              <div className="text-5xl font-bold text-blue-600" data-testid="stat-builders-count">1,247</div>
               <p className="text-zinc-600 dark:text-zinc-400 mt-2">Builders</p>
             </div>
-            <div>
-              <div className="text-5xl font-bold text-purple-600">89</div>
+            <div data-testid="stat-challenges">
+              <div className="text-5xl font-bold text-purple-600" data-testid="stat-challenges-count">89</div>
               <p className="text-zinc-600 dark:text-zinc-400 mt-2">Challenges</p>
             </div>
-            <div>
-              <div className="text-5xl font-bold text-pink-600">342</div>
+            <div data-testid="stat-projects">
+              <div className="text-5xl font-bold text-pink-600" data-testid="stat-projects-count">342</div>
               <p className="text-zinc-600 dark:text-zinc-400 mt-2">Projects Evaluated</p>
             </div>
           </div>

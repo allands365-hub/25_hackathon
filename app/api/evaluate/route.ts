@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
 import Groq from 'groq-sdk';
+import { sendEmail } from '@/lib/email/client';
+import { scoreUpdateEmail, type ScoreUpdateData } from '@/lib/email/templates';
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY!,
@@ -184,8 +186,38 @@ Respond ONLY with valid JSON matching the format above.`;
     // Update submission status to evaluated
     await supabaseAdmin
       .from('submissions')
-      .update({ status: 'evaluated' })
+      .update({ status: 'scored' })
       .eq('id', submissionId);
+
+    // Fetch user email and send notification
+    try {
+      const { data: userData } = await supabaseAdmin
+        .from('users')
+        .select('email, username')
+        .eq('id', submission.user_id)
+        .single();
+
+      if (userData?.email) {
+        const notificationData: ScoreUpdateData = {
+          userName: userData.username,
+          challengeTitle: submission.challenge.title,
+          submissionId: submissionId,
+          score: clampedScore,
+          isHybrid: false,
+          llmScore: clampedScore,
+          challengeId: submission.challenge_id,
+        };
+
+        await sendEmail({
+          to: userData.email,
+          subject: `✅ Your Score for ${submission.challenge.title} is Ready!`,
+          html: scoreUpdateEmail(notificationData),
+        });
+      }
+    } catch (emailError) {
+      console.error('Failed to send email notification:', emailError);
+      // Don't fail the evaluation if email fails
+    }
 
     return NextResponse.json({
       success: true,

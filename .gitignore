@@ -13,6 +13,12 @@
 # testing
 /coverage
 
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+playwright/.cache/
+
 # next.js
 /.next/
 /out/
@@ -38,6 +44,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+!.env.example
 
 # vercel
 .vercel
@@ -45,6 +52,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# turbopack
+.turbo/
 
 # security sensitive files
 .mcp.json
@@ -64,6 +74,17 @@ check-*.js
 # logs
 *.log
 logs/
+
+# python (for security-scan.py)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
 
 # temporary files
 *.tmp

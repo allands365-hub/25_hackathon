@@ -4,9 +4,10 @@ test.describe('Authentication Flow', () => {
   test('should load homepage', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Check if homepage loaded
-    await expect(page.locator('text=Build AI Products')).toBeVisible();
-    await expect(page.locator('text=Get Hired')).toBeVisible();
+    // Check if homepage loaded using data-testid
+    await expect(page.getByTestId('hero-title')).toBeVisible();
+    await expect(page.getByTestId('hero-title')).toHaveText('Prove Your AI Skills.');
+    await expect(page.getByTestId('hero-subtitle')).toHaveText('Get Hired.');
 
     console.log('✅ Homepage loaded successfully');
   });
@@ -14,8 +15,8 @@ test.describe('Authentication Flow', () => {
   test('should have sign in button', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Check for sign in button
-    const signInButton = page.locator('text=Sign In').first();
+    // Check for sign in button using data-testid
+    const signInButton = page.getByTestId('nav-signin-btn');
     await expect(signInButton).toBeVisible();
 
     console.log('✅ Sign in button found');
@@ -24,21 +25,27 @@ test.describe('Authentication Flow', () => {
   test('should navigate to sign in page', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Click sign in
-    await page.click('text=Sign In');
+    // Click sign in using data-testid
+    await page.getByTestId('nav-signin-btn').click();
 
     // Wait for navigation
     await page.waitForURL('**/auth/signin');
 
-    // Check sign in page
-    await expect(page.locator('text=Welcome to BuildAI Arena')).toBeVisible();
-    await expect(page.locator('text=Sign in with GitHub')).toBeVisible();
+    // Check sign in page using data-testid
+    await expect(page.getByTestId('signin-welcome-heading')).toBeVisible();
+    await expect(page.getByTestId('signin-welcome-heading')).toHaveText('Welcome Back');
 
     console.log('✅ Sign in page loaded');
   });
 
   test('should show GitHub OAuth flow when clicking sign in', async ({ page, context }) => {
     await page.goto('http://localhost:3000/auth/signin');
+
+    // Select builder role first
+    await page.getByTestId('role-builder-card').click();
+
+    // Wait for builder signin page
+    await page.waitForSelector('[data-testid="signin-builder-page"]');
 
     // Listen for console errors
     const errors: string[] = [];
@@ -51,8 +58,8 @@ test.describe('Authentication Flow', () => {
     // Listen for popup (GitHub OAuth opens in popup or redirect)
     const popupPromise = context.waitForEvent('page', { timeout: 5000 }).catch(() => null);
 
-    // Click GitHub sign in button
-    await page.click('text=Sign in with GitHub');
+    // Click GitHub sign in button using data-testid
+    await page.getByTestId('github-signin-btn').click();
 
     // Wait a bit for any errors
     await page.waitForTimeout(2000);
@@ -120,10 +127,60 @@ test.describe('Authentication Flow', () => {
 
     await page.goto('http://localhost:3000/auth/signin');
 
-    // Click sign in
-    await page.click('text=Sign in with GitHub');
+    // Select builder role
+    await page.getByTestId('role-builder-card').click();
+    await page.waitForSelector('[data-testid="signin-builder-page"]');
+
+    // Click sign in using data-testid
+    await page.getByTestId('github-signin-btn').click();
 
     // Wait to see network activity
     await page.waitForTimeout(3000);
+  });
+
+  test('should display role selection cards', async ({ page }) => {
+    await page.goto('http://localhost:3000/auth/signin');
+
+    // Check both role cards are visible
+    const builderCard = page.getByTestId('role-builder-card');
+    await expect(builderCard).toBeVisible();
+    await expect(builderCard).toContainText("I'm a Builder");
+
+    const sponsorCard = page.getByTestId('role-sponsor-card');
+    await expect(sponsorCard).toBeVisible();
+    await expect(sponsorCard).toContainText("I'm a Company/Sponsor");
+
+    console.log('✅ Both role selection cards are visible');
+  });
+
+  test('should navigate to builder signin after role selection', async ({ page }) => {
+    await page.goto('http://localhost:3000/auth/signin');
+
+    // Click builder card
+    await page.getByTestId('role-builder-card').click();
+
+    // Check builder signin page loaded
+    await expect(page.getByTestId('signin-builder-heading')).toBeVisible();
+    await expect(page.getByTestId('signin-builder-heading')).toHaveText('Welcome to BuildAI Arena');
+
+    console.log('✅ Builder signin page loaded after role selection');
+  });
+
+  test('should navigate to sponsor signin after role selection', async ({ page }) => {
+    await page.goto('http://localhost:3000/auth/signin');
+
+    // Click sponsor card
+    await page.getByTestId('role-sponsor-card').click();
+
+    // Check sponsor signin page loaded
+    await expect(page.getByTestId('signin-sponsor-heading')).toBeVisible();
+    await expect(page.getByTestId('signin-sponsor-heading')).toHaveText('Sponsor Sign In');
+
+    // Check form inputs are visible
+    await expect(page.getByTestId('sponsor-email-input')).toBeVisible();
+    await expect(page.getByTestId('sponsor-password-input')).toBeVisible();
+    await expect(page.getByTestId('sponsor-signin-btn')).toBeVisible();
+
+    console.log('✅ Sponsor signin page loaded with form fields');
   });
 });

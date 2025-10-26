@@ -138,7 +138,8 @@ export default function SubmissionDetailPage() {
     }
   };
 
-  const getVideoEmbedUrl = (url: string) => {
+  const getVideoEmbedUrl = (url: string | null) => {
+    if (!url) return null;
     if (url.includes('youtube.com/watch?v=')) {
       const videoId = url.split('v=')[1]?.split('&')[0];
       return `https://www.youtube.com/embed/${videoId}`;

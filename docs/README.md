@@ -2,9 +2,10 @@
 
 All documentation for your hackathon project.
 
-## 🚀 Start Here Tomorrow
+## 🚀 Start Here
 
-**[HACKATHON_DAY_GUIDE.md](./HACKATHON_DAY_GUIDE.md)** - Your go-to guide for hackathon day. Open this first thing tomorrow!
+**[LATEST_UPDATES_10_26.md](./LATEST_UPDATES_10_26.md)** - Latest changes and updates (October 26, 2025)  
+**[HACKATHON_DAY_GUIDE.md](./HACKATHON_DAY_GUIDE.md)** - Your go-to guide for hackathon day
 
 ## 📚 Complete Guides
 

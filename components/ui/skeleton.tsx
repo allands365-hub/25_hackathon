@@ -12,4 +12,17 @@ function Skeleton({
   )
 }
 
-export { Skeleton }
+// Enhanced shimmer skeleton for better loading states
+function ShimmerSkeleton({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("shimmer rounded-md", className)}
+      {...props}
+    />
+  )
+}
+
+export { Skeleton, ShimmerSkeleton }

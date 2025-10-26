@@ -235,6 +235,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     {...register('repoUrl')}
                     placeholder="https://github.com/username/project"
                     className={errors.repoUrl ? 'border-red-500 pr-10' : ''}
+                    data-testid="repo-url-input"
                   />
                   {errors.repoUrl && (
                     <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
@@ -258,6 +259,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     {...register('deckUrl')}
                     placeholder="https://docs.google.com/presentation/..."
                     className={errors.deckUrl ? 'border-red-500 pr-10' : ''}
+                    data-testid="deck-url-input"
                   />
                   {errors.deckUrl && (
                     <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
@@ -281,6 +283,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     {...register('videoUrl')}
                     placeholder="https://youtube.com/watch?v=..."
                     className={errors.videoUrl ? 'border-red-500 pr-10' : ''}
+                    data-testid="video-url-input"
                   />
                   {errors.videoUrl && (
                     <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
@@ -317,6 +320,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                         {...register('summary')}
                         placeholder="Describe your project, key features, and how it solves the problem..."
                         className={`min-h-[120px] ${errors.summary ? 'border-red-500 pr-10' : ''}`}
+                        data-testid="summary-textarea"
                       />
                       {errors.summary && (
                         <AlertCircle className="absolute right-3 top-3 h-4 w-4 text-red-500" />
@@ -420,16 +424,16 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
 
   return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="submission-form-dialog">
             <DialogHeader>
-              <DialogTitle>Submit to {challenge.title}</DialogTitle>
-              <p className="text-sm text-muted-foreground">
+              <DialogTitle data-testid="submission-form-title">Submit to {challenge.title}</DialogTitle>
+              <p className="text-sm text-muted-foreground" data-testid="submission-form-description">
                 Complete the multi-step form to submit your project for evaluation.
               </p>
             </DialogHeader>
 
         {/* Step indicator */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6" data-testid="submission-form-steps">
           {STEPS.map((step, index) => (
             <div key={step.id} className="flex items-center">
               <div className={`
@@ -458,13 +462,14 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
         </div>
 
         {/* Navigation buttons */}
-        <div className="flex justify-between">
+        <div className="flex justify-between" data-testid="submission-form-navigation">
           <Button
             type="button"
             variant="outline"
             onClick={handleBack}
             disabled={currentStep === 1}
             className="flex items-center gap-2"
+            data-testid="submission-back-btn"
           >
             <ArrowLeft className="h-4 w-4" />
             Back
@@ -475,6 +480,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
               type="button"
               variant="outline"
               onClick={onClose}
+              data-testid="submission-cancel-btn"
             >
               Cancel
             </Button>
@@ -483,6 +489,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
               onClick={handleNext}
               disabled={isSubmitting}
               className="flex items-center gap-2"
+              data-testid="submission-next-btn"
             >
               {isSubmitting ? (
                 'Submitting...'
