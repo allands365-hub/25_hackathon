@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Trophy, Medal, Award, Crown, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth/hooks';
-import Image from 'next/image';
+import { Avatar } from '@/components/ui/avatar';
 
 // Hardcoded career leaderboard data for MVP
 const HARDCODED_LEADERBOARD = [
@@ -187,15 +187,11 @@ export default function LeaderboardPage() {
                   </div>
 
                   {/* Avatar */}
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-800">
-                    <Image
-                      src={entry.avatar}
-                      alt={entry.username}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <Avatar
+                    src={entry.avatar}
+                    alt={entry.username}
+                    size="md"
+                  />
 
                   {/* User Info */}
                   <div className="flex-1 min-w-0">

@@ -1,10 +1,10 @@
 'use client';
 
 import { useAuth } from '@/lib/auth/hooks';
+import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export function Navigation() {
@@ -115,16 +115,12 @@ export function Navigation() {
                   className="flex items-center gap-2"
                   data-testid="nav-user-profile"
                 >
-                  {profile.avatar_url && (
-                    <Image
-                      src={profile.avatar_url}
-                      alt={profile.username}
-                      width={32}
-                      height={32}
-                      className="rounded-full"
-                      data-testid="nav-user-avatar"
-                    />
-                  )}
+                  <Avatar
+                    src={profile.avatar_url}
+                    alt={profile.username}
+                    size="sm"
+                    className="data-testid=nav-user-avatar"
+                  />
                   <span className="hidden sm:inline text-sm font-medium text-zinc-900 dark:text-zinc-100" data-testid="nav-username">
                     {profile.username}
                   </span>
