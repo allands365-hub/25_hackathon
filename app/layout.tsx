@@ -38,6 +38,16 @@ export default function RootLayout({
           forcedTheme="light"
           disableTransitionOnChange
         >
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (typeof document !== 'undefined') {
+                  document.body.style.backgroundColor = 'white';
+                  document.body.style.color = 'black';
+                }
+              `,
+            }}
+          />
           <Navigation />
           {children}
           <Toaster />
