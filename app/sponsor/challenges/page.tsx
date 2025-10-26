@@ -19,6 +19,7 @@ import {
   DollarSign,
   CheckCircle,
   XCircle,
+  Download,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -129,6 +130,34 @@ export default function SponsorshallengesPage() {
     } catch (error) {
       console.error('Error updating challenge:', error);
       toast.error('Failed to update challenge');
+    }
+  };
+
+  const handleDownloadCandidates = async (challengeId: string) => {
+    try {
+      const response = await fetch(`/api/sponsor/download-candidates?challengeId=${challengeId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to download candidates');
+      }
+
+      const data = await response.json();
+      
+      // Download as JSON file
+      const blob = new Blob([JSON.stringify(data.candidates, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `candidates-${challengeId}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      toast.success('Candidates exported successfully!');
+    } catch (error) {
+      console.error('Error downloading candidates:', error);
+      toast.error('Failed to download candidates');
     }
   };
 
@@ -272,6 +301,16 @@ export default function SponsorshallengesPage() {
                         Edit
                       </Link>
                     </Button>
+                    {challenge.submission_count && challenge.submission_count > 0 && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDownloadCandidates(challenge.id)}
+                      >
+                        <Download className="h-4 w-4 mr-1" />
+                        Export
+                      </Button>
+                    )}
                     <Button
                       variant="outline"
                       size="sm"
