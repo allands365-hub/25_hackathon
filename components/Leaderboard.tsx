@@ -97,7 +97,7 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
           schema: 'public',
           table: 'manual_reviews',
         },
-        async (payload) => {
+        async (payload: any) => {
           console.log('Manual review change detected:', payload);
           // Check if this review is for a submission in this challenge
           const { data: submission } = await supabase
@@ -218,12 +218,15 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
             return null;
           }
 
+          // Type assertion for nested user data
+          const userData = (item as any).users;
+          
           return {
             id: item.id,
             user_id: item.user_id,
             submission_id: item.id,
-            username: item.users.username,
-            avatar_url: item.users.avatar_url,
+            username: userData?.username || 'Unknown',
+            avatar_url: userData?.avatar_url || null,
             score: finalScore,
             llm_score: llmScore,
             manual_score: manualScore,

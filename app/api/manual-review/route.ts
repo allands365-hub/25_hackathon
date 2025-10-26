@@ -67,7 +67,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Submission not found' }, { status: 404 });
     }
 
-    if (submission.challenges.created_by !== user.id) {
+    // Type assertion for nested challenge data
+    const challenge = (submission as any).challenges;
+    if (challenge && challenge.created_by !== user.id) {
       return NextResponse.json(
         { error: 'You can only review submissions to your own challenges' },
         { status: 403 }
@@ -152,13 +154,17 @@ export async function POST(request: NextRequest) {
         .eq('id', reviewData.submission_id)
         .single();
 
-      if (submissionWithUser && submissionWithUser.users?.email) {
+      // Type assertion for nested user and challenge data
+      const userData = (submissionWithUser as any)?.users;
+      const challengeData = (submissionWithUser as any)?.challenges;
+      
+      if (submissionWithUser && userData?.email) {
         // Calculate final hybrid score from manual review
         const finalScore = overallScore; // This will be recalculated by the view
 
         const notificationData: ScoreUpdateData = {
-          userName: submissionWithUser.users.username,
-          challengeTitle: submissionWithUser.challenges.title,
+          userName: userData.username,
+          challengeTitle: challengeData.title,
           submissionId: reviewData.submission_id,
           score: finalScore,
           isHybrid: true,
@@ -167,8 +173,8 @@ export async function POST(request: NextRequest) {
         };
 
         await sendEmail({
-          to: submissionWithUser.users.email,
-          subject: `✅ Your Score for ${submissionWithUser.challenges.title} is Ready!`,
+          to: userData.email,
+          subject: `✅ Your Score for ${challengeData.title} is Ready!`,
           html: scoreUpdateEmail(notificationData),
         });
       }
