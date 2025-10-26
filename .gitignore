@@ -105,3 +105,9 @@ out/
 
 # misc documentation (local reference only)
 Misc_doc/
+
+# IDE and tooling
+.bmad-core/
+.cursor/
+screenshots/
+web-bundles/
