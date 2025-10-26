@@ -124,6 +124,8 @@ export function useAuth() {
     await supabase.auth.signOut();
     setUser(null);
     setProfile(null);
+    // Redirect to homepage after sign out
+    window.location.href = '/';
   };
 
   return {
