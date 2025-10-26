@@ -87,6 +87,10 @@ ${submission.video_url ? `- Demo Video: ${submission.video_url}` : ''}
 Respond ONLY with valid JSON matching the format above.`;
 
     // Call Groq API for evaluation
+    console.log('🤖 [EVALUATION] Starting Groq evaluation...');
+    console.log(`🤖 [EVALUATION] Submission ID: ${submissionId}`);
+    console.log(`🤖 [EVALUATION] Challenge: ${submission.challenge.title}`);
+    
     let completion;
     try {
       completion = await groq.chat.completions.create({
@@ -106,8 +110,9 @@ Respond ONLY with valid JSON matching the format above.`;
         max_tokens: 1500,
         response_format: { type: 'json_object' },
       });
+      console.log('✅ [EVALUATION] Groq API call successful');
     } catch (groqError: any) {
-      console.error('Groq API error:', groqError);
+      console.error('❌ [EVALUATION] Groq API error:', groqError);
       
       // Handle rate limiting
       if (groqError.status === 429) {
@@ -191,6 +196,7 @@ Respond ONLY with valid JSON matching the format above.`;
 
     // Fetch user email and send notification
     try {
+      console.log('📧 [EVALUATION] Checking for user email...');
       const { data: userData } = await supabaseAdmin
         .from('users')
         .select('email, username')
@@ -198,6 +204,9 @@ Respond ONLY with valid JSON matching the format above.`;
         .single();
 
       if (userData?.email) {
+        console.log(`📧 [EVALUATION] User email found: ${userData.email}`);
+        console.log(`📧 [EVALUATION] Sending notification email for score: ${clampedScore}`);
+        
         const notificationData: ScoreUpdateData = {
           userName: userData.username,
           challengeTitle: submission.challenge.title,
@@ -208,14 +217,22 @@ Respond ONLY with valid JSON matching the format above.`;
           challengeId: submission.challenge_id,
         };
 
-        await sendEmail({
+        const emailResult = await sendEmail({
           to: userData.email,
           subject: `✅ Your Score for ${submission.challenge.title} is Ready!`,
           html: scoreUpdateEmail(notificationData),
         });
+        
+        if (emailResult.success) {
+          console.log('✅ [EVALUATION] Email notification sent successfully!');
+        } else {
+          console.error('❌ [EVALUATION] Failed to send email:', emailResult.error);
+        }
+      } else {
+        console.log('⚠️ [EVALUATION] No email found for user');
       }
     } catch (emailError) {
-      console.error('Failed to send email notification:', emailError);
+      console.error('❌ [EVALUATION] Failed to send email notification:', emailError);
       // Don't fail the evaluation if email fails
     }
 
