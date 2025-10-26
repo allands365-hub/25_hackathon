@@ -18,8 +18,8 @@ html.dark {
 }
 
 html.dark body {
-  background-color: oklch(0.145 0 0);
-  color: oklch(0.985 0 0);
+  background-color: #242424 !important;
+  color: #fafafa !important;
 }
 
 :root {
