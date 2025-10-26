@@ -75,12 +75,12 @@ export default function SignInPage() {
 
   if (selectedRole === null) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4" data-testid="signin-role-selection">
+      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4" data-testid="signin-role-selection">
         <div className="max-w-4xl w-full space-y-8">
           {/* Header */}
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-900" data-testid="signin-welcome-heading">Welcome Back</h1>
-            <p className="text-zinc-600 text-lg" data-testid="signin-description">
+            <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100" data-testid="signin-welcome-heading">Welcome Back</h1>
+            <p className="text-zinc-600 dark:text-zinc-400 text-lg" data-testid="signin-description">
               Choose how you want to sign in to BuildAI Arena
             </p>
           </div>
@@ -95,12 +95,12 @@ export default function SignInPage() {
             >
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-blue-100 rounded-full">
+                  <div className="p-4 bg-blue-100 dark:bg-blue-950 rounded-full">
                     <Github className="h-8 w-8 text-blue-600" />
                   </div>
                 </div>
-                <CardTitle className="text-xl text-zinc-900">I'm a Builder</CardTitle>
-                <CardDescription className="text-zinc-600">
+                <CardTitle className="text-xl text-zinc-900 dark:text-zinc-100">I'm a Builder</CardTitle>
+                <CardDescription className="text-zinc-600 dark:text-zinc-400">
                   Sign in with GitHub to continue building
                 </CardDescription>
               </CardHeader>
@@ -119,12 +119,12 @@ export default function SignInPage() {
             >
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-purple-100 rounded-full">
+                  <div className="p-4 bg-purple-100 dark:bg-purple-950 rounded-full">
                     <Building2 className="h-8 w-8 text-purple-600" />
                   </div>
                 </div>
-                <CardTitle className="text-xl text-zinc-900">I'm a Company/Sponsor</CardTitle>
-                <CardDescription className="text-zinc-600">
+                <CardTitle className="text-xl text-zinc-900 dark:text-zinc-100">I'm a Company/Sponsor</CardTitle>
+                <CardDescription className="text-zinc-600 dark:text-zinc-400">
                   Sign in with your company credentials
                 </CardDescription>
               </CardHeader>
@@ -138,9 +138,9 @@ export default function SignInPage() {
 
           {/* Sign Up Link */}
           <div className="text-center">
-            <p className="text-zinc-600">
+            <p className="text-zinc-600 dark:text-zinc-400">
               Don't have an account?{' '}
-              <Link href="/auth/signup" className="text-blue-600 hover:text-blue-700 underline">
+              <Link href="/auth/signup" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline">
                 Sign up
               </Link>
             </p>
@@ -152,12 +152,12 @@ export default function SignInPage() {
 
   if (selectedRole === 'builder') {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white px-4" data-testid="signin-builder-page">
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black px-4" data-testid="signin-builder-page">
         <Card className="max-w-md w-full p-8">
           <div className="text-center space-y-6">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-zinc-900" data-testid="signin-builder-heading">Welcome to BuildAI Arena</h1>
-              <p className="text-zinc-600 mt-2" data-testid="signin-builder-description">
+              <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100" data-testid="signin-builder-heading">Welcome to BuildAI Arena</h1>
+              <p className="text-zinc-600 dark:text-zinc-400 mt-2" data-testid="signin-builder-description">
                 Sign in to submit your AI projects and compete on the leaderboard
               </p>
             </div>
@@ -175,7 +175,7 @@ export default function SignInPage() {
               </Button>
             </div>
 
-            <div className="text-sm text-zinc-600">
+            <div className="text-sm text-zinc-600 dark:text-zinc-400">
               <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
             </div>
 
@@ -195,12 +195,12 @@ export default function SignInPage() {
 
   if (selectedRole === 'sponsor') {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white px-4" data-testid="signin-sponsor-page">
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black px-4" data-testid="signin-sponsor-page">
         <Card className="max-w-md w-full p-8">
           <div className="space-y-6">
             <div className="text-center">
-              <h1 className="text-3xl font-bold tracking-tight text-zinc-900" data-testid="signin-sponsor-heading">Sponsor Sign In</h1>
-              <p className="text-zinc-600 mt-2" data-testid="signin-sponsor-description">
+              <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100" data-testid="signin-sponsor-heading">Sponsor Sign In</h1>
+              <p className="text-zinc-600 dark:text-zinc-400 mt-2" data-testid="signin-sponsor-description">
                 Sign in with your company credentials
               </p>
             </div>
@@ -244,7 +244,7 @@ export default function SignInPage() {
               {isLoading ? 'Signing in...' : 'Sign In'}
             </Button>
 
-            <div className="text-sm text-zinc-600 text-center">
+            <div className="text-sm text-zinc-600 dark:text-zinc-400 text-center">
               <p>By signing in, you agree to our Terms of Service and Privacy Policy</p>
             </div>
 
