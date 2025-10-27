@@ -8,6 +8,13 @@ export async function GET(request: Request) {
   const role = requestUrl.searchParams.get('role'); // Get role from URL params
   const origin = requestUrl.origin;
 
+  console.log('[AUTH CALLBACK] Request received:', {
+    url: request.url,
+    origin,
+    code: !!code,
+    role,
+  });
+
   if (code) {
     const cookieStore = await cookies();
 
@@ -39,10 +46,11 @@ export async function GET(request: Request) {
     );
 
     // Exchange code for session with proper cookie storage
+    console.log('[AUTH CALLBACK] Exchanging code for session...');
     const { data: { session }, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
 
     if (sessionError) {
-      console.error('Auth callback error:', sessionError);
+      console.error('[AUTH CALLBACK] Session error:', sessionError);
       const errorResponse = NextResponse.redirect(`${origin}/auth/error`);
       // Copy cookies even on error
       response.cookies.getAll().forEach(cookie => {
@@ -52,6 +60,8 @@ export async function GET(request: Request) {
     }
 
     if (session?.user) {
+      console.log('[AUTH CALLBACK] Session obtained, user:', session.user.id);
+      
       // Get GitHub user data from session
       const githubUser = session.user.user_metadata;
 
@@ -59,6 +69,7 @@ export async function GET(request: Request) {
       const { supabaseAdmin } = await import('@/lib/supabase/server');
 
       // Create or update user profile in our users table
+      console.log('[AUTH CALLBACK] Checking existing user...');
       const { data: existingUser } = await supabaseAdmin
         .from('users')
         .select('*')
@@ -133,6 +144,8 @@ export async function GET(request: Request) {
         // Builder - redirect to challenges
         redirectUrl = `${origin}/challenges`;
       }
+
+      console.log('[AUTH CALLBACK] Redirecting to:', redirectUrl);
 
       // Create redirect response with cookies
       const redirectResponse = NextResponse.redirect(redirectUrl);
