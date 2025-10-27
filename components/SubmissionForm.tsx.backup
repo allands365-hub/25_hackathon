@@ -243,15 +243,15 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                   <Input
                     {...register('repoUrl')}
                     placeholder="https://github.com/username/project"
-                    className={errors.repoUrl ? 'border-destructive pr-10' : ''}
+                    className={errors.repoUrl ? 'border-red-500 pr-10' : ''}
                     data-testid="repo-url-input"
                   />
                   {errors.repoUrl && (
-                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-destructive" />
+                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
                   )}
                 </div>
                 {errors.repoUrl && (
-                  <p className="text-sm text-destructive mt-1 flex items-center gap-1">
+                  <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
                     <AlertCircle className="h-3 w-3" />
                     {errors.repoUrl.message}
                   </p>
@@ -267,15 +267,15 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                   <Input
                     {...register('deckUrl')}
                     placeholder="https://docs.google.com/presentation/..."
-                    className={errors.deckUrl ? 'border-destructive pr-10' : ''}
+                    className={errors.deckUrl ? 'border-red-500 pr-10' : ''}
                     data-testid="deck-url-input"
                   />
                   {errors.deckUrl && (
-                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-destructive" />
+                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
                   )}
                 </div>
                 {errors.deckUrl && (
-                  <p className="text-sm text-destructive mt-1 flex items-center gap-1">
+                  <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
                     <AlertCircle className="h-3 w-3" />
                     {errors.deckUrl.message}
                   </p>
@@ -291,15 +291,15 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                   <Input
                     {...register('videoUrl')}
                     placeholder="https://youtube.com/watch?v=..."
-                    className={errors.videoUrl ? 'border-destructive pr-10' : ''}
+                    className={errors.videoUrl ? 'border-red-500 pr-10' : ''}
                     data-testid="video-url-input"
                   />
                   {errors.videoUrl && (
-                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-destructive" />
+                    <AlertCircle className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-red-500" />
                   )}
                 </div>
                 {errors.videoUrl && (
-                  <p className="text-sm text-destructive mt-1 flex items-center gap-1">
+                  <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
                     <AlertCircle className="h-3 w-3" />
                     {errors.videoUrl.message}
                   </p>
@@ -328,11 +328,11 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                       <Textarea
                         {...register('summary')}
                         placeholder="Describe your project, key features, and how it solves the problem..."
-                        className={`min-h-[120px] ${errors.summary ? 'border-destructive pr-10' : ''}`}
+                        className={`min-h-[120px] ${errors.summary ? 'border-red-500 pr-10' : ''}`}
                         data-testid="summary-textarea"
                       />
                       {errors.summary && (
-                        <AlertCircle className="absolute right-3 top-3 h-4 w-4 text-destructive" />
+                        <AlertCircle className="absolute right-3 top-3 h-4 w-4 text-red-500" />
                       )}
                     </div>
                     <CharacterCounter 
@@ -342,7 +342,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                       className="mt-2"
                     />
                     {errors.summary && (
-                      <p className="text-sm text-destructive mt-1 flex items-center gap-1">
+                      <p className="text-sm text-red-500 mt-1 flex items-center gap-1">
                         <AlertCircle className="h-3 w-3" />
                         {errors.summary.message}
                       </p>
@@ -372,7 +372,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     href={watchedValues.repoUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline text-sm flex items-center gap-1"
+                    className="text-blue-600 hover:underline text-sm flex items-center gap-1"
                   >
                     {watchedValues.repoUrl}
                     <ExternalLink className="h-3 w-3" />
@@ -387,7 +387,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     href={watchedValues.deckUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline text-sm flex items-center gap-1"
+                    className="text-blue-600 hover:underline text-sm flex items-center gap-1"
                   >
                     {watchedValues.deckUrl}
                     <ExternalLink className="h-3 w-3" />
@@ -402,7 +402,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                     href={watchedValues.videoUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline text-sm flex items-center gap-1"
+                    className="text-blue-600 hover:underline text-sm flex items-center gap-1"
                   >
                     {watchedValues.videoUrl}
                     <ExternalLink className="h-3 w-3" />
@@ -448,8 +448,8 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
               <div className={`
                 flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium
                 ${currentStep >= step.id 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-muted text-muted-foreground'
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-200 text-gray-600'
                 }
               `}>
                 {currentStep > step.id ? <CheckCircle className="h-4 w-4" /> : step.id}
@@ -459,7 +459,7 @@ export function SubmissionForm({ challenge, isOpen, onClose, onSuccess }: Submis
                 <p className="text-xs text-muted-foreground">{step.description}</p>
               </div>
               {index < STEPS.length - 1 && (
-                <div className={`w-8 h-0.5 mx-4 ${currentStep > step.id ? 'bg-primary' : 'bg-muted'}`} />
+                <div className={`w-8 h-0.5 mx-4 ${currentStep > step.id ? 'bg-blue-600' : 'bg-gray-200'}`} />
               )}
             </div>
           ))}

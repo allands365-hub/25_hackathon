@@ -167,7 +167,7 @@ export default function SponsorDashboard() {
         <h1 className="text-3xl font-bold tracking-tight mb-2">
           Welcome back, {profile?.company_name || profile?.username}!
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-muted-foreground">
           Here's what's happening with your challenges
         </p>
       </div>
@@ -178,11 +178,11 @@ export default function SponsorDashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-zinc-500 mb-1">Total Challenges</p>
+                <p className="text-sm text-muted-foreground mb-1">Total Challenges</p>
                 <p className="text-3xl font-bold">{stats?.total_challenges || 0}</p>
               </div>
-              <div className="p-3 bg-blue-100 dark:bg-blue-950 rounded-full">
-                <Trophy className="h-6 w-6 text-blue-600" />
+              <div className="p-3 bg-primary/20 rounded-full">
+                <Trophy className="h-6 w-6 text-primary" />
               </div>
             </div>
           </CardContent>
@@ -192,13 +192,13 @@ export default function SponsorDashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-zinc-500 mb-1">Active Challenges</p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-sm text-muted-foreground mb-1">Active Challenges</p>
+                <p className="text-3xl font-bold text-[color:var(--success)]">
                   {stats?.active_challenges || 0}
                 </p>
               </div>
-              <div className="p-3 bg-green-100 dark:bg-green-950 rounded-full">
-                <TrendingUp className="h-6 w-6 text-green-600" />
+              <div className="p-3 bg-[color:var(--success)]/10 rounded-full">
+                <TrendingUp className="h-6 w-6 text-[color:var(--success)]" />
               </div>
             </div>
           </CardContent>
@@ -208,11 +208,11 @@ export default function SponsorDashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-zinc-500 mb-1">Total Submissions</p>
+                <p className="text-sm text-muted-foreground mb-1">Total Submissions</p>
                 <p className="text-3xl font-bold">{stats?.total_submissions || 0}</p>
               </div>
-              <div className="p-3 bg-purple-100 dark:bg-purple-950 rounded-full">
-                <Users className="h-6 w-6 text-purple-600" />
+              <div className="p-3 bg-accent rounded-full">
+                <Users className="h-6 w-6 text-accent-foreground" />
               </div>
             </div>
           </CardContent>
@@ -222,13 +222,13 @@ export default function SponsorDashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-zinc-500 mb-1">Pending Reviews</p>
-                <p className="text-3xl font-bold text-amber-600">
+                <p className="text-sm text-muted-foreground mb-1">Pending Reviews</p>
+                <p className="text-3xl font-bold text-[color:var(--warning)]">
                   {stats?.pending_reviews || 0}
                 </p>
               </div>
-              <div className="p-3 bg-amber-100 dark:bg-amber-950 rounded-full">
-                <Clock className="h-6 w-6 text-amber-600" />
+              <div className="p-3 bg-[color:var(--warning)]/10 rounded-full">
+                <Clock className="h-6 w-6 text-[color:var(--warning)]" />
               </div>
             </div>
           </CardContent>
@@ -263,23 +263,23 @@ export default function SponsorDashboard() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-blue-100 dark:bg-blue-950 rounded">
-                <AlertCircle className="h-5 w-5 text-blue-600" />
+              <div className="p-2 bg-primary/20 rounded">
+                <AlertCircle className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h4 className="font-semibold text-sm mb-1">Creating Effective Challenges</h4>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-muted-foreground">
                   Learn how to write clear problem statements and evaluation rubrics
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-purple-100 dark:bg-purple-950 rounded">
-                <Star className="h-5 w-5 text-purple-600" />
+              <div className="p-2 bg-accent rounded">
+                <Star className="h-5 w-5 text-accent-foreground" />
               </div>
               <div>
                 <h4 className="font-semibold text-sm mb-1">Reviewing Submissions</h4>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-muted-foreground">
                   Best practices for evaluating builder submissions
                 </p>
               </div>
@@ -295,7 +295,7 @@ export default function SponsorDashboard() {
             <CardTitle>Recent Submissions</CardTitle>
             <Link
               href="/sponsor/challenges"
-              className="text-sm text-purple-600 hover:underline"
+              className="text-sm text-accent-foreground hover:underline"
             >
               View all →
             </Link>
@@ -304,8 +304,8 @@ export default function SponsorDashboard() {
         <CardContent>
           {recentSubmissions.length === 0 ? (
             <div className="text-center py-12">
-              <Users className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
-              <p className="text-zinc-600 dark:text-zinc-400 mb-4">
+              <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <p className="text-muted-foreground mb-4">
                 No submissions yet
               </p>
               <Button asChild>
@@ -317,7 +317,7 @@ export default function SponsorDashboard() {
               {recentSubmissions.map((submission) => (
                 <div
                   key={submission.id}
-                  className="flex items-start gap-4 p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  className="flex items-start gap-4 p-4 rounded-lg border border-border hover:bg-secondary transition-colors"
                 >
                   {/* User Avatar */}
                   <img
@@ -330,15 +330,15 @@ export default function SponsorDashboard() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-semibold">{submission.username}</span>
-                      <span className="text-sm text-zinc-500">submitted to</span>
-                      <span className="text-sm font-medium text-purple-600">
+                      <span className="text-sm text-muted-foreground">submitted to</span>
+                      <span className="text-sm font-medium text-accent-foreground">
                         {submission.challenge_title}
                       </span>
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2 mb-2">
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
                       {submission.summary}
                     </p>
-                    <div className="flex items-center gap-4 text-xs text-zinc-500">
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
                       <span>{new Date(submission.created_at).toLocaleDateString()}</span>
                       {submission.llm_score !== null && (
                         <Badge variant="secondary">LLM Score: {submission.llm_score}/100</Badge>

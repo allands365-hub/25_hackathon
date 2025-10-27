@@ -258,43 +258,43 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
   const getRankIcon = (rank: number) => {
     if (rank === 1) return (
       <div className="flex items-center gap-1">
-        <Crown className="h-7 w-7 text-[color:var(--chart-1)] animate-pulse-gentle" />
-        <span className="text-lg font-black text-[color:var(--chart-1)]">#1</span>
+        <Crown className="h-7 w-7 text-yellow-500 animate-pulse-gentle" />
+        <span className="text-lg font-black text-yellow-600">#1</span>
       </div>
     );
     if (rank === 2) return (
       <div className="flex items-center gap-1">
-        <Medal className="h-6 w-6 text-muted-foreground" />
-        <span className="text-lg font-bold text-muted-foreground">#2</span>
+        <Medal className="h-6 w-6 text-zinc-400" />
+        <span className="text-lg font-bold text-zinc-500">#2</span>
       </div>
     );
     if (rank === 3) return (
       <div className="flex items-center gap-1">
-        <Award className="h-6 w-6 text-[color:var(--chart-3)]" />
-        <span className="text-lg font-bold text-[color:var(--chart-3)]">#3</span>
+        <Award className="h-6 w-6 text-amber-600" />
+        <span className="text-lg font-bold text-amber-600">#3</span>
       </div>
     );
-    return <span className="text-lg font-bold text-muted-foreground">#{rank}</span>;
+    return <span className="text-lg font-bold text-zinc-400">#{rank}</span>;
   };
 
   const getScoreBadge = (scoreType: string) => {
     if (scoreType === 'hybrid') {
       return (
-        <Badge className="bg-accent text-accent-foreground">
+        <Badge className="bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300">
           <Star className="h-3 w-3 mr-1" />
           Hybrid
         </Badge>
       );
     } else if (scoreType === 'llm_only') {
       return (
-        <Badge className="bg-primary/10 text-primary">
+        <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">
           <Brain className="h-3 w-3 mr-1" />
           AI
         </Badge>
       );
     } else {
       return (
-        <Badge className="bg-[color:var(--success)]/10 text-[color:var(--success)]">
+        <Badge className="bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300">
           <Star className="h-3 w-3 mr-1" />
           Manual
         </Badge>
@@ -311,17 +311,17 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="border-b border-border">
+                  <thead className="border-b border-zinc-200 dark:border-zinc-700">
                     <tr>
-                      <th className="text-left p-4 font-semibold text-muted-foreground">Rank</th>
-                      <th className="text-left p-4 font-semibold text-muted-foreground">Builder</th>
-                      <th className="text-right p-4 font-semibold text-muted-foreground">Score</th>
-                      <th className="text-center p-4 font-semibold text-muted-foreground">Actions</th>
+                      <th className="text-left p-4 font-semibold text-zinc-600 dark:text-zinc-400">Rank</th>
+                      <th className="text-left p-4 font-semibold text-zinc-600 dark:text-zinc-400">Builder</th>
+                      <th className="text-right p-4 font-semibold text-zinc-600 dark:text-zinc-400">Score</th>
+                      <th className="text-center p-4 font-semibold text-zinc-600 dark:text-zinc-400">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <tr key={i} className="border-b border-border">
+                      <tr key={i} className="border-b border-zinc-100 dark:border-zinc-800">
                         <td className="p-4">
                           <Skeleton className="h-6 w-8" />
                         </td>
@@ -386,11 +386,11 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
     return (
       <Card className="p-8">
         <div className="text-center py-12">
-          <Trophy className="h-16 w-16 text-muted mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-muted-foreground mb-2">
+          <Trophy className="h-16 w-16 text-zinc-300 mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-zinc-600 dark:text-zinc-400 mb-2">
             No submissions evaluated yet
           </h3>
-          <p className="text-muted-foreground">
+          <p className="text-zinc-500 dark:text-zinc-500">
             Be the first to submit and get evaluated!
           </p>
         </div>
@@ -406,22 +406,22 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="border-b border-border">
+                <thead className="border-b border-zinc-200 dark:border-zinc-700">
                   <tr>
-                    <th className="text-left p-4 font-semibold text-muted-foreground">Rank</th>
-                    <th className="text-left p-4 font-semibold text-muted-foreground">Builder</th>
-                    <th className="text-right p-4 font-semibold text-muted-foreground">Score</th>
-                    <th className="text-center p-4 font-semibold text-muted-foreground">Actions</th>
+                    <th className="text-left p-4 font-semibold text-zinc-600 dark:text-zinc-400">Rank</th>
+                    <th className="text-left p-4 font-semibold text-zinc-600 dark:text-zinc-400">Builder</th>
+                    <th className="text-right p-4 font-semibold text-zinc-600 dark:text-zinc-400">Score</th>
+                    <th className="text-center p-4 font-semibold text-zinc-600 dark:text-zinc-400">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {entries.map((entry) => (
                     <tr
                       key={entry.submission_id}
-                      className={`border-b border-border hover:bg-accent/50 transition-colors ${
-                        entry.is_user_submission ? 'bg-primary/5' : ''
+                      className={`border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors ${
+                        entry.is_user_submission ? 'bg-blue-50 dark:bg-blue-900/20' : ''
                       } ${
-                        entry.is_new ? 'animate-pulse bg-[color:var(--success)]/5' : ''
+                        entry.is_new ? 'animate-pulse bg-green-50 dark:bg-green-900/20' : ''
                       }`}
                     >
                       <td className="p-4">
@@ -446,8 +446,8 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
                             </a>
                           ) : (
                             <a href={`/users/${entry.user_id}`} className="hover:opacity-80 transition-opacity">
-                              <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
-                                <span className="text-sm font-medium text-muted-foreground">
+                              <div className="w-10 h-10 bg-zinc-200 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-medium text-zinc-600">
                                   {entry.username.charAt(0).toUpperCase()}
                                 </span>
                               </div>
@@ -456,11 +456,11 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
                           <div>
                             <a 
                               href={`/users/${entry.user_id}`}
-                              className="font-semibold hover:text-primary transition-colors"
+                              className="font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                             >
                               {entry.username}
                             </a>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-sm text-zinc-500">
                               {new Date(entry.submitted_at).toLocaleDateString()}
                             </p>
                           </div>
@@ -469,27 +469,27 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
                       <td className="p-4 text-right">
                         <div className="flex flex-col items-end gap-2">
                           <div className={`text-4xl font-black ${
-                            entry.score >= 90 ? 'bg-gradient-to-r from-[color:var(--success)] to-[color:var(--success)] bg-clip-text text-transparent' :
-                            entry.score >= 70 ? 'text-primary' :
-                            entry.score >= 50 ? 'text-[color:var(--chart-3)]' :
-                            'text-muted-foreground'
+                            entry.score >= 90 ? 'bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent' :
+                            entry.score >= 70 ? 'text-blue-600' :
+                            entry.score >= 50 ? 'text-amber-600' :
+                            'text-zinc-600'
                           }`}>
                             {entry.score}
                           </div>
                           {getScoreBadge(entry.score_type)}
                           {entry.score_type === 'hybrid' && (
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-zinc-500">
                               AI: {entry.llm_score} | Human: {entry.manual_score}
                             </p>
                           )}
                           {/* Score progress bar */}
-                          <div className="w-24 h-2 bg-secondary rounded-full overflow-hidden">
+                          <div className="w-24 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
                             <div 
                               className={`h-full ${
-                                entry.score >= 90 ? 'bg-gradient-to-r from-[color:var(--success)] to-[color:var(--success)]' :
-                                entry.score >= 70 ? 'bg-gradient-to-r from-primary to-primary' :
-                                entry.score >= 50 ? 'bg-gradient-to-r from-[color:var(--chart-3)] to-[color:var(--warning)]' :
-                                'bg-gradient-to-r from-muted-foreground to-muted-foreground'
+                                entry.score >= 90 ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
+                                entry.score >= 70 ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                                entry.score >= 50 ? 'bg-gradient-to-r from-amber-500 to-orange-500' :
+                                'bg-gradient-to-r from-zinc-500 to-zinc-600'
                               }`}
                               style={{ width: `${entry.score}%` }}
                             />
@@ -526,9 +526,9 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
           <Card
             key={entry.submission_id}
             className={`p-4 transition-all duration-300 ${
-              entry.is_user_submission ? 'ring-2 ring-primary/20 bg-primary/5' : ''
+              entry.is_user_submission ? 'ring-2 ring-blue-200 dark:ring-blue-800 bg-blue-50 dark:bg-blue-900/20' : ''
             } ${
-              entry.is_new ? 'animate-pulse bg-[color:var(--success)]/5' : ''
+              entry.is_new ? 'animate-pulse bg-green-50 dark:bg-green-900/20' : ''
             }`}
           >
             <div className="flex items-center gap-3 mb-3">
@@ -552,8 +552,8 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
                     </a>
                   ) : (
                     <a href={`/users/${entry.id}`} className="hover:opacity-80 transition-opacity">
-                      <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                        <span className="text-xs font-medium text-muted-foreground">
+                      <div className="w-8 h-8 bg-zinc-200 dark:bg-zinc-700 rounded-full flex items-center justify-center">
+                        <span className="text-xs font-medium text-zinc-600">
                           {entry.username.charAt(0).toUpperCase()}
                         </span>
                       </div>
@@ -562,11 +562,11 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
                   <div>
                     <a 
                       href={`/users/${entry.id}`}
-                      className="font-semibold text-sm hover:text-primary transition-colors"
+                      className="font-semibold text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
                       {entry.username}
                     </a>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-zinc-500">
                       {new Date(entry.submitted_at).toLocaleDateString()}
                     </p>
                   </div>
@@ -574,27 +574,27 @@ export function Leaderboard({ challengeId, limit = 10 }: LeaderboardProps) {
               </div>
               <div className="text-right">
                 <div className={`text-2xl font-black ${
-                  entry.score >= 90 ? 'bg-gradient-to-r from-[color:var(--success)] to-[color:var(--success)] bg-clip-text text-transparent' :
-                  entry.score >= 70 ? 'text-primary' :
-                  entry.score >= 50 ? 'text-[color:var(--chart-3)]' :
-                  'text-muted-foreground'
+                  entry.score >= 90 ? 'bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent' :
+                  entry.score >= 70 ? 'text-blue-600' :
+                  entry.score >= 50 ? 'text-amber-600' :
+                  'text-zinc-600'
                 }`}>
                   {entry.score}
                 </div>
                 {getScoreBadge(entry.score_type)}
                 {entry.score_type === 'hybrid' && (
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-xs text-zinc-500 mt-1">
                     AI: {entry.llm_score}<br/>Human: {entry.manual_score}
                   </p>
                 )}
                 {/* Score progress bar for mobile */}
-                <div className="w-16 h-1.5 bg-secondary rounded-full overflow-hidden mt-2 ml-auto">
+                <div className="w-16 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden mt-2 ml-auto">
                   <div 
                     className={`h-full ${
-                      entry.score >= 90 ? 'bg-gradient-to-r from-[color:var(--success)] to-[color:var(--success)]' :
-                      entry.score >= 70 ? 'bg-gradient-to-r from-primary to-primary' :
-                      entry.score >= 50 ? 'bg-gradient-to-r from-[color:var(--chart-3)] to-[color:var(--warning)]' :
-                      'bg-gradient-to-r from-muted-foreground to-muted-foreground'
+                      entry.score >= 90 ? 'bg-gradient-to-r from-green-500 to-emerald-500' :
+                      entry.score >= 70 ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                      entry.score >= 50 ? 'bg-gradient-to-r from-amber-500 to-orange-500' :
+                      'bg-gradient-to-r from-zinc-500 to-zinc-600'
                     }`}
                     style={{ width: `${entry.score}%` }}
                   />

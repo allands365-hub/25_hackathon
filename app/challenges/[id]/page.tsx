@@ -75,7 +75,7 @@ export default function ChallengeDetailPage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-600">Loading challenge...</p>
+        <p className="text-muted-foreground">Loading challenge...</p>
       </div>
     );
   }
@@ -85,7 +85,7 @@ export default function ChallengeDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4" data-testid="challenge-detail-page">
+    <div className="min-h-screen bg-background py-12 px-4" data-testid="challenge-detail-page">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Challenge Header */}
         <Card className="p-8" data-testid="challenge-header-card">
@@ -95,19 +95,19 @@ export default function ChallengeDetailPage() {
                 <h1 className="text-4xl font-bold tracking-tight mb-2" data-testid="challenge-detail-title">
                   {challenge.title}
                 </h1>
-                <p className="text-zinc-600 dark:text-zinc-400 text-lg" data-testid="challenge-detail-description">
+                <p className="text-muted-foreground text-lg" data-testid="challenge-detail-description">
                   {challenge.description}
                 </p>
               </div>
               {(challenge as any).creator && (
                 <div className="text-right">
-                  <p className="text-xs text-zinc-500 mb-1 flex items-center justify-end gap-1">
+                  <p className="text-xs text-muted-foreground mb-1 flex items-center justify-end gap-1">
                     <Building2 className="h-3 w-3" />
                     Challenge by
                   </p>
                   <Link 
                     href={`/users/${(challenge as any).creator.id}`}
-                    className="font-semibold text-lg text-blue-600 hover:text-blue-700 hover:underline transition-colors flex items-center justify-end gap-1"
+                    className="font-semibold text-lg text-primary hover:text-primary/80 hover:underline transition-colors flex items-center justify-end gap-1"
                   >
                     {(challenge as any).creator.company_name || (challenge as any).creator.username}
                     <ExternalLink className="h-4 w-4" />
@@ -117,10 +117,10 @@ export default function ChallengeDetailPage() {
             </div>
 
             <div className="flex gap-4 items-center">
-              <span className="px-4 py-2 rounded-full bg-zinc-200 dark:bg-zinc-800 text-sm font-medium">
+              <span className="px-4 py-2 rounded-full bg-secondary text-sm font-medium">
                 {challenge.difficulty}
               </span>
-              <span className="text-sm text-zinc-600">
+              <span className="text-sm text-muted-foreground">
                 Deadline: {new Date(challenge.deadline).toLocaleDateString()}
               </span>
             </div>
@@ -131,7 +131,7 @@ export default function ChallengeDetailPage() {
         <Card className="p-8" data-testid="problem-statement-card">
           <h2 className="text-2xl font-bold mb-4" data-testid="problem-statement-heading">Problem Statement</h2>
           <div className="prose dark:prose-invert max-w-none">
-            <pre className="whitespace-pre-wrap font-sans text-zinc-700 dark:text-zinc-300" data-testid="problem-statement-text">
+            <pre className="whitespace-pre-wrap font-sans text-foreground" data-testid="problem-statement-text">
               {challenge.problem_statement}
             </pre>
           </div>
@@ -142,12 +142,12 @@ export default function ChallengeDetailPage() {
           <h2 className="text-2xl font-bold mb-4" data-testid="evaluation-rubric-heading">Evaluation Rubric</h2>
           <div className="space-y-4">
             {challenge.rubric.criteria.map((criterion, index) => (
-              <div key={index} className="border-l-4 border-blue-500 pl-4">
+              <div key={index} className="border-l-4 border-primary pl-4">
                 <div className="flex justify-between items-start mb-1">
                   <h3 className="font-semibold text-lg">{criterion.name}</h3>
-                  <span className="text-blue-600 font-bold">{criterion.weight}%</span>
+                  <span className="text-primary font-bold">{criterion.weight}%</span>
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400">{criterion.description}</p>
+                <p className="text-muted-foreground">{criterion.description}</p>
               </div>
             ))}
           </div>
@@ -165,12 +165,12 @@ export default function ChallengeDetailPage() {
               Submit Your Project
             </Button>
           ) : (
-            <Card className="p-6 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
+            <Card className="p-6 border-primary/20 bg-primary/10">
               <div className="text-center space-y-4">
-                <p className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                <p className="text-lg font-semibold text-foreground">
                   Sign in to submit your project
                 </p>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-muted-foreground">
                   You need to sign in to participate in this challenge
                 </p>
                 <Button asChild size="lg" className="px-8">

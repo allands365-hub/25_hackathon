@@ -5,16 +5,16 @@ import { FileX, Home, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <FileX className="h-12 w-12 text-zinc-400" />
+            <FileX className="h-12 w-12 text-muted-foreground" />
           </div>
           <CardTitle className="text-2xl">Page not found</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-zinc-600 dark:text-zinc-400 text-center">
+          <p className="text-muted-foreground text-center">
             The page you're looking for doesn't exist or has been moved.
           </p>
           

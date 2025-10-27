@@ -19,14 +19,14 @@ export function CharacterCounter({
   const isValid = !isOverLimit && !isUnderMin;
 
   const getStatusColor = () => {
-    if (isOverLimit || isUnderMin) return 'text-red-500';
-    if (isNearLimit) return 'text-amber-500';
-    return 'text-green-500';
+    if (isOverLimit || isUnderMin) return 'text-destructive';
+    if (isNearLimit) return 'text-[color:var(--warning)]';
+    return 'text-[color:var(--success)]';
   };
 
   const getStatusText = () => {
     if (isOverLimit) return 'Over limit';
-    if (isUnderMin) return `Need ${min - current} more characters`;
+    if (isUnderMin) return 'Need ' + (min - current) + ' more characters';
     if (isNearLimit) return 'Approaching limit';
     return 'Valid';
   };

@@ -143,7 +143,7 @@ export default function ProfilePage() {
         name: 'First Submission',
         description: 'Submitted your first project',
         icon: <Target className="h-4 w-4" />,
-        color: 'bg-blue-500',
+        color: 'bg-primary/100',
         earned: submissions.length > 0
       },
       {
@@ -151,7 +151,7 @@ export default function ProfilePage() {
         name: 'Top 10%',
         description: 'Achieved a score in the top 10%',
         icon: <Star className="h-4 w-4" />,
-        color: 'bg-yellow-500',
+        color: 'bg-[color:var(--warning)]/100',
         earned: submissions.some(s => s.evaluation && s.evaluation.score >= 90)
       },
       {
@@ -159,7 +159,7 @@ export default function ProfilePage() {
         name: 'Challenge Winner',
         description: 'Won first place in a challenge',
         icon: <Trophy className="h-4 w-4" />,
-        color: 'bg-purple-500',
+        color: 'bg-accent0',
         earned: submissions.some(s => s.evaluation && s.evaluation.rank === 1)
       },
       {
@@ -167,7 +167,7 @@ export default function ProfilePage() {
         name: 'High Scorer',
         description: 'Achieved a score above 80',
         icon: <Award className="h-4 w-4" />,
-        color: 'bg-green-500',
+        color: 'bg-[color:var(--success)]/100',
         earned: submissions.some(s => s.evaluation && s.evaluation.score >= 80)
       },
       {
@@ -175,7 +175,7 @@ export default function ProfilePage() {
         name: 'Prolific Builder',
         description: 'Submitted 5 or more projects',
         icon: <Code className="h-4 w-4" />,
-        color: 'bg-orange-500',
+        color: 'bg-[color:var(--chart-3)]',
         earned: submissions.length >= 5
       }
     ];
@@ -222,7 +222,7 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-600">Loading...</p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
@@ -232,7 +232,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-8 px-4">
+    <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Responsive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -252,14 +252,14 @@ export default function ProfilePage() {
                     />
                   )}
                   <div>
-                    <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{profile.username}</h1>
-                    <p className="text-zinc-600 dark:text-zinc-400">{profile.email}</p>
+                    <h1 className="text-2xl font-bold text-foreground">{profile.username}</h1>
+                    <p className="text-muted-foreground">{profile.email}</p>
                     <div className="flex items-center justify-center gap-4 mt-2">
                       <a
                         href={`https://github.com/${profile.username}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center gap-1"
+                        className="text-primary hover:underline text-sm flex items-center gap-1"
                       >
                         <Github className="h-4 w-4" />
                         GitHub Profile
@@ -270,7 +270,7 @@ export default function ProfilePage() {
                           href={linkedinUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center gap-1"
+                          className="text-primary hover:underline text-sm flex items-center gap-1"
                         >
                           <Linkedin className="h-4 w-4" />
                           LinkedIn
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                           href={portfolioUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center gap-1"
+                          className="text-primary hover:underline text-sm flex items-center gap-1"
                         >
                           <Globe className="h-4 w-4" />
                           Portfolio
@@ -294,7 +294,7 @@ export default function ProfilePage() {
                           href={cvUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center gap-1"
+                          className="text-primary hover:underline text-sm flex items-center gap-1"
                         >
                           <FileText className="h-4 w-4" />
                           CV
@@ -302,7 +302,7 @@ export default function ProfilePage() {
                         </a>
                       )}
                     </div>
-                    <p className="text-sm text-zinc-500 mt-2">
+                    <p className="text-sm text-muted-foreground mt-2">
                       <Calendar className="h-4 w-4 inline mr-1" />
                       Member since {new Date(profile.created_at).toLocaleDateString()}
                     </p>
@@ -329,7 +329,7 @@ export default function ProfilePage() {
                 
                 {/* LinkedIn Profile Link */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     LinkedIn Profile URL
                   </label>
                   <Input
@@ -339,14 +339,14 @@ export default function ProfilePage() {
                     type="url"
                     className="w-full"
                   />
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Add your LinkedIn profile to help sponsors discover you
                   </p>
                 </div>
 
                 {/* Portfolio Website */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Portfolio Website URL
                   </label>
                   <Input
@@ -356,14 +356,14 @@ export default function ProfilePage() {
                     type="url"
                     className="w-full"
                   />
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Link to your portfolio, GitHub Pages, or personal website
                   </p>
                 </div>
 
                 {/* CV/Resume */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     CV/Resume URL
                   </label>
                   <Input
@@ -373,14 +373,14 @@ export default function ProfilePage() {
                     type="url"
                     className="w-full"
                   />
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Link to your CV (Google Drive, Dropbox, or personal website)
                   </p>
                 </div>
 
                 {/* Location */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Location
                   </label>
                   <Input
@@ -393,7 +393,7 @@ export default function ProfilePage() {
 
                 {/* Personal Website */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Personal Website
                   </label>
                   <Input
@@ -407,7 +407,7 @@ export default function ProfilePage() {
 
                 {/* Twitter */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Twitter/X Profile
                   </label>
                   <Input
@@ -421,7 +421,7 @@ export default function ProfilePage() {
 
                 {/* Experience Years */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Years of Experience
                   </label>
                   <Input
@@ -436,13 +436,13 @@ export default function ProfilePage() {
 
                 {/* Availability Status */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Availability Status
                   </label>
                   <select
                     value={availabilityStatus}
                     onChange={(e) => setAvailabilityStatus(e.target.value as 'available' | 'busy' | 'not_looking')}
-                    className="w-full p-2 border border-zinc-300 dark:border-zinc-600 rounded-md bg-white dark:bg-zinc-800"
+                    className="w-full p-2 border border-border rounded-md bg-white"
                   >
                     <option value="available">Available for opportunities</option>
                     <option value="busy">Busy but open to opportunities</option>
@@ -452,7 +452,7 @@ export default function ProfilePage() {
 
                 {/* Skills */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block text-zinc-900 dark:text-zinc-100">
+                  <label className="text-sm font-medium mb-2 block text-foreground">
                     Skills & Technologies
                   </label>
                   <div className="flex gap-2 mb-2">
@@ -473,14 +473,14 @@ export default function ProfilePage() {
                         {skill}
                         <button
                           onClick={() => removeSkill(skill)}
-                          className="ml-1 hover:text-red-500"
+                          className="ml-1 hover:text-destructive"
                         >
                           <X className="h-3 w-3" />
                         </button>
                       </Badge>
                     ))}
                   </div>
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Add your technical skills and technologies
                   </p>
                 </div>
@@ -506,18 +506,18 @@ export default function ProfilePage() {
                       key={badge.id}
                       className={`flex items-center gap-3 p-3 rounded-lg border ${
                         badge.earned 
-                          ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700' 
-                          : 'bg-zinc-50 dark:bg-zinc-900 border-zinc-100 dark:border-zinc-800 opacity-60'
+                          ? 'bg-secondary border-border' 
+                          : 'bg-background border-border opacity-60'
                       }`}
                     >
                       <div className={`p-2 rounded-full ${badge.color} ${badge.earned ? '' : 'opacity-50'}`}>
                         {badge.icon}
                       </div>
                       <div className="flex-1">
-                        <h4 className={`font-medium ${badge.earned ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500'}`}>
+                        <h4 className={`font-medium ${badge.earned ? 'text-foreground' : 'text-muted-foreground'}`}>
                           {badge.name}
                         </h4>
-                        <p className="text-sm text-zinc-500">{badge.description}</p>
+                        <p className="text-sm text-muted-foreground">{badge.description}</p>
                       </div>
                     </div>
                   ))}
@@ -540,13 +540,13 @@ export default function ProfilePage() {
               <Card className="p-12 text-center hover-lift">
                 <div className="space-y-6">
                   <div className="mx-auto w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full flex items-center justify-center">
-                    <Zap className="h-16 w-16 text-blue-600 dark:text-blue-400" />
+                    <Zap className="h-16 w-16 text-primary" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                       Ready to Make Your Mark?
                     </h3>
-                    <p className="text-zinc-600 dark:text-zinc-400 mb-6 max-w-md mx-auto">
+                    <p className="text-muted-foreground mb-6 max-w-md mx-auto">
                       Start building AI products and showcase your skills to the world! Submit your first project and climb the leaderboard.
                     </p>
                     <Button asChild size="lg" className="transition-all hover:scale-105">
@@ -575,23 +575,23 @@ export default function ProfilePage() {
                               {submission.challenge.difficulty}
                             </Badge>
                           </div>
-                          <p className="text-zinc-600 dark:text-zinc-400 mb-3 line-clamp-2">
+                          <p className="text-muted-foreground mb-3 line-clamp-2">
                             {submission.summary}
                           </p>
-                          <div className="flex gap-4 text-sm text-zinc-500">
+                          <div className="flex gap-4 text-sm text-muted-foreground">
                             <span className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
                               {new Date(submission.created_at).toLocaleDateString()}
                             </span>
                             <span className={`flex items-center gap-1 ${
-                              submission.status === 'scored' ? 'text-green-600' :
-                              submission.status === 'evaluating' ? 'text-blue-600' :
-                              'text-amber-600'
+                              submission.status === 'scored' ? 'text-[color:var(--success)]' :
+                              submission.status === 'evaluating' ? 'text-primary' :
+                              'text-[color:var(--warning)]'
                             }`}>
                               <div className={`w-2 h-2 rounded-full ${
-                                submission.status === 'scored' ? 'bg-green-500' :
-                                submission.status === 'evaluating' ? 'bg-blue-500 animate-pulse' :
-                                'bg-amber-500'
+                                submission.status === 'scored' ? 'bg-[color:var(--success)]/100' :
+                                submission.status === 'evaluating' ? 'bg-primary/100 animate-pulse' :
+                                'bg-[color:var(--warning)]/100'
                               }`} />
                               {submission.status === 'scored' ? 'Evaluated' :
                                submission.status === 'evaluating' ? 'Evaluating...' :
@@ -601,10 +601,10 @@ export default function ProfilePage() {
                         </div>
                         {submission.evaluation && (
                           <div className="text-right ml-4">
-                            <div className="text-3xl font-bold text-blue-600">
+                            <div className="text-3xl font-bold text-primary">
                               {submission.evaluation.score}
                             </div>
-                            <p className="text-sm text-zinc-600">Score</p>
+                            <p className="text-sm text-muted-foreground">Score</p>
                           </div>
                         )}
                       </div>

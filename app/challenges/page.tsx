@@ -66,13 +66,13 @@ export default function ChallengesPage() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Beginner':
-        return 'text-green-600 bg-green-50 dark:bg-green-950';
+        return 'text-[color:var(--success)] bg-[color:var(--success)]/10';
       case 'Intermediate':
-        return 'text-yellow-600 bg-yellow-50 dark:bg-yellow-950';
+        return 'text-[color:var(--warning)] bg-[color:var(--warning)]/10';
       case 'Advanced':
-        return 'text-red-600 bg-red-50 dark:bg-red-950';
+        return 'text-destructive bg-destructive/10';
       default:
-        return 'text-zinc-600 bg-zinc-50 dark:bg-zinc-950';
+        return 'text-muted-foreground bg-muted';
     }
   };
 
@@ -85,7 +85,7 @@ export default function ChallengesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+      <div className="min-h-screen bg-background py-12 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header Skeleton */}
           <div className="mb-8">
@@ -125,7 +125,7 @@ export default function ChallengesPage() {
                   </div>
 
                   {/* Footer Skeleton */}
-                  <div className="flex justify-between items-center pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <div className="flex justify-between items-center pt-4 border-t border-border">
                     <Skeleton className="h-4 w-24" />
                     <Skeleton className="h-10 w-24" />
                   </div>
@@ -139,7 +139,7 @@ export default function ChallengesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4" data-testid="challenges-page">
+    <div className="min-h-screen bg-background py-12 px-4" data-testid="challenges-page">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -153,10 +153,10 @@ export default function ChallengesPage() {
               </Button>
             )}
           </div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2 text-zinc-900 dark:text-zinc-100" data-testid="challenges-page-heading">
+          <h1 className="text-4xl font-bold tracking-tight mb-2 text-foreground" data-testid="challenges-page-heading">
             {isSponsor ? "Builder Arena" : "Challenges"}
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400" data-testid="challenges-page-description">
+          <p className="text-muted-foreground" data-testid="challenges-page-description">
             {isSponsor
               ? "See what challenges builders are working on in the arena"
               : "Build AI products, get evaluated by LLM, and climb the leaderboard"
@@ -170,7 +170,7 @@ export default function ChallengesPage() {
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="px-4 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
+            className="px-4 py-2 rounded-md border border-border bg-card"
             data-testid="difficulty-filter-select"
           >
             <option value="all">All Levels</option>
@@ -178,7 +178,7 @@ export default function ChallengesPage() {
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
           </select>
-          <span className="text-sm text-zinc-500" data-testid="challenge-count">
+          <span className="text-sm text-muted-foreground" data-testid="challenge-count">
             {filteredChallenges.length} challenge{filteredChallenges.length !== 1 ? 's' : ''}
           </span>
         </div>
@@ -186,7 +186,7 @@ export default function ChallengesPage() {
         {/* Challenge Grid */}
         {filteredChallenges.length === 0 ? (
           <Card className="p-12 text-center" data-testid="no-challenges-message">
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-muted-foreground">
               No challenges found for this difficulty level.
             </p>
           </Card>
@@ -201,7 +201,7 @@ export default function ChallengesPage() {
                     {/* Header */}
                     <div className="flex justify-between items-start gap-4">
                       <div className="flex-1">
-                        <h2 className="text-2xl font-semibold mb-2 text-zinc-900 dark:text-zinc-100" data-testid="challenge-title">{challenge.title}</h2>
+                        <h2 className="text-2xl font-semibold mb-2 text-foreground" data-testid="challenge-title">{challenge.title}</h2>
                         <span
                           className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor(
                             challenge.difficulty
@@ -213,13 +213,13 @@ export default function ChallengesPage() {
                       </div>
                       {(challenge as any).creator && (
                         <div className="text-right">
-                          <p className="text-xs text-zinc-500 mb-1 flex items-center justify-end gap-1">
+                          <p className="text-xs text-muted-foreground mb-1 flex items-center justify-end gap-1">
                             <Building2 className="h-3 w-3" />
                             Challenge by
                           </p>
                           <Link 
                             href={`/users/${(challenge as any).creator.id}`}
-                            className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition-colors flex items-center justify-end gap-1"
+                            className="font-semibold text-primary hover:text-primary/80 hover:underline transition-colors flex items-center justify-end gap-1"
                           >
                             {(challenge as any).creator.company_name || (challenge as any).creator.username}
                             <ExternalLink className="h-3 w-3" />
@@ -229,19 +229,19 @@ export default function ChallengesPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-zinc-600 dark:text-zinc-400 line-clamp-3" data-testid="challenge-description">
+                    <p className="text-muted-foreground line-clamp-3" data-testid="challenge-description">
                       {challenge.description}
                     </p>
 
                     {/* Footer */}
-                    <div className="flex justify-between items-center pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                    <div className="flex justify-between items-center pt-4 border-t border-border">
                       <div className="text-sm" data-testid="challenge-deadline">
                         {daysRemaining > 0 ? (
-                          <span className="text-zinc-600">
+                          <span className="text-muted-foreground">
                             {daysRemaining} day{daysRemaining !== 1 ? 's' : ''} remaining
                           </span>
                         ) : (
-                          <span className="text-red-600">Deadline passed</span>
+                          <span className="text-destructive">Deadline passed</span>
                         )}
                       </div>
                       <Button asChild data-testid="view-challenge-btn">

@@ -115,12 +115,12 @@ export default function SignUpPage() {
 
   if (selectedRole === null) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="max-w-4xl w-full space-y-8">
           {/* Header */}
           <div className="text-center space-y-2">
             <h1 className="text-4xl font-bold tracking-tight">Join BuildAI Arena</h1>
-            <p className="text-zinc-600 dark:text-zinc-400 text-lg">
+            <p className="text-muted-foreground text-lg">
               Choose how you want to participate in the AI building community
             </p>
           </div>
@@ -129,13 +129,13 @@ export default function SignUpPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {/* Builder Card */}
             <Card
-              className="cursor-pointer hover:shadow-lg transition-all border-2 hover:border-blue-500"
+              className="cursor-pointer hover:shadow-lg transition-all border-2 hover:border-primary"
               onClick={() => setSelectedRole('builder')}
             >
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-blue-100 dark:bg-blue-950 rounded-full">
-                    <Github className="h-8 w-8 text-blue-600" />
+                  <div className="p-4 bg-primary/20 rounded-full">
+                    <Github className="h-8 w-8 text-primary" />
                   </div>
                 </div>
                 <CardTitle className="text-xl">I'm a Builder</CardTitle>
@@ -144,7 +144,7 @@ export default function SignUpPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">
-                <div className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-sm text-muted-foreground">
                   <p>• Submit AI projects to challenges</p>
                   <p>• Get evaluated by LLMs and sponsors</p>
                   <p>• Compete on leaderboards</p>
@@ -158,13 +158,13 @@ export default function SignUpPage() {
 
             {/* Sponsor Card */}
             <Card
-              className="cursor-pointer hover:shadow-lg transition-all border-2 hover:border-purple-500"
+              className="cursor-pointer hover:shadow-lg transition-all border-2 hover:border-accent"
               onClick={() => setSelectedRole('sponsor')}
             >
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-purple-100 dark:bg-purple-950 rounded-full">
-                    <Building2 className="h-8 w-8 text-purple-600" />
+                  <div className="p-4 bg-accent rounded-full">
+                    <Building2 className="h-8 w-8 text-accent-foreground" />
                   </div>
                 </div>
                 <CardTitle className="text-xl">I'm a Company/Sponsor</CardTitle>
@@ -173,7 +173,7 @@ export default function SignUpPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">
-                <div className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-2 text-sm text-muted-foreground">
                   <p>• Post AI product challenges</p>
                   <p>• Review and evaluate submissions</p>
                   <p>• Discover talented AI builders</p>
@@ -188,9 +188,9 @@ export default function SignUpPage() {
 
           {/* Sign In Link */}
           <div className="text-center">
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-muted-foreground">
               Already have an account?{' '}
-              <Link href="/auth/signin" className="text-blue-600 hover:text-blue-700 underline">
+              <Link href="/auth/signin" className="text-primary hover:text-primary/80 underline">
                 Sign in
               </Link>
             </p>
@@ -202,12 +202,12 @@ export default function SignUpPage() {
 
   if (selectedRole === 'builder') {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8">
           <div className="text-center space-y-6">
             <div>
               <h1 className="text-3xl font-bold tracking-tight">Join as a Builder</h1>
-              <p className="text-zinc-600 dark:text-zinc-400 mt-2">
+              <p className="text-muted-foreground mt-2">
                 Sign up with GitHub to start building AI projects and competing
               </p>
             </div>
@@ -224,7 +224,7 @@ export default function SignUpPage() {
               </Button>
             </div>
 
-            <div className="text-sm text-zinc-600 dark:text-zinc-400">
+            <div className="text-sm text-muted-foreground">
               <p>By signing up, you agree to our Terms of Service and Privacy Policy</p>
             </div>
 
@@ -244,12 +244,12 @@ export default function SignUpPage() {
 
   if (selectedRole === 'sponsor') {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4">
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8">
           <div className="space-y-6">
             <div className="text-center">
               <h1 className="text-3xl font-bold tracking-tight">Join as a Sponsor</h1>
-              <p className="text-zinc-600 dark:text-zinc-400 mt-2">
+              <p className="text-muted-foreground mt-2">
                 Create your company account to start posting challenges
               </p>
             </div>
@@ -325,7 +325,7 @@ export default function SignUpPage() {
               {isLoading ? 'Creating Account...' : 'Create Company Account'}
             </Button>
 
-            <div className="text-sm text-zinc-600 dark:text-zinc-400 text-center">
+            <div className="text-sm text-muted-foreground text-center">
               <p>By signing up, you agree to our Terms of Service and Privacy Policy</p>
             </div>
 

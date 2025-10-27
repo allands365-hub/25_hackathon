@@ -48,17 +48,17 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
   const initials = getInitials(alt);
   const sizeClass = sizeClasses[size];
 
-  // Generate a color based on the username for consistent avatar colors
+  // Generate a color based on the username using chart colors from theme
   const getAvatarColor = (name: string) => {
     const colors = [
-      'bg-red-500',
-      'bg-blue-500',
-      'bg-green-500',
-      'bg-yellow-500',
-      'bg-purple-500',
-      'bg-pink-500',
-      'bg-indigo-500',
-      'bg-orange-500',
+      'bg-[color:var(--chart-1)]',
+      'bg-[color:var(--chart-2)]',
+      'bg-[color:var(--chart-3)]',
+      'bg-[color:var(--chart-4)]',
+      'bg-[color:var(--chart-5)]',
+      'bg-primary',
+      'bg-accent',
+      'bg-secondary',
     ];
     
     let hash = 0;
@@ -73,7 +73,7 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
   if (!src || imageError) {
     return (
       <div
-        className={`${sizeClass} ${avatarBgColor} rounded-full flex items-center justify-center text-white font-bold ${className}`}
+        className={'rounded-full flex items-center justify-center text-white font-bold ' + sizeClass + ' ' + avatarBgColor + ' ' + className}
       >
         {initials}
       </div>
@@ -87,7 +87,7 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
         alt={alt}
         width={size === 'sm' ? 32 : size === 'md' ? 48 : size === 'lg' ? 80 : 120}
         height={size === 'sm' ? 32 : size === 'md' ? 48 : size === 'lg' ? 80 : 120}
-        className={`rounded-full ${className}`}
+        className={'rounded-full ' + className}
         onError={() => {
           setImageError(true);
           setIsLoading(false);
@@ -97,7 +97,7 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
       />
       {isLoading && (
         <div
-          className={`absolute inset-0 ${sizeClass} ${avatarBgColor} rounded-full flex items-center justify-center text-white font-bold`}
+          className={'absolute inset-0 rounded-full flex items-center justify-center text-white font-bold ' + sizeClass + ' ' + avatarBgColor}
         >
           {initials}
         </div>
@@ -105,4 +105,3 @@ export function Avatar({ src, alt, size = 'md', className = '' }: AvatarProps) {
     </div>
   );
 }
-

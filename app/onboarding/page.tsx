@@ -89,17 +89,17 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="max-w-md w-full p-8">
         <div className="text-center space-y-6">
           <div>
             <div className="flex justify-center mb-4">
-              <div className="p-4 bg-purple-100 dark:bg-purple-950 rounded-full">
-                <Building2 className="h-8 w-8 text-purple-600" />
+              <div className="p-4 bg-accent rounded-full">
+                <Building2 className="h-8 w-8 text-accent-foreground" />
               </div>
             </div>
             <h1 className="text-3xl font-bold tracking-tight">Complete Your Company Profile</h1>
-            <p className="text-zinc-600 dark:text-zinc-400 mt-2">
+            <p className="text-muted-foreground mt-2">
               Add your company information to start posting challenges
             </p>
           </div>
@@ -150,7 +150,7 @@ export default function OnboardingPage() {
             {isLoading ? 'Updating Profile...' : 'Complete Setup'}
           </Button>
 
-          <div className="text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="text-sm text-muted-foreground">
             <p>This information will be displayed on your challenges and company profile</p>
           </div>
         </div>

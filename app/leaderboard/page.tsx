@@ -116,47 +116,47 @@ export default function LeaderboardPage() {
   const { isSponsor, profile } = useAuth();
 
   const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Crown className="h-5 w-5 text-yellow-500" />;
-    if (rank === 2) return <Medal className="h-5 w-5 text-zinc-400" />;
-    if (rank === 3) return <Award className="h-5 w-5 text-orange-500" />;
-    return <span className="text-zinc-500 font-bold">#{rank}</span>;
+    if (rank === 1) return <Crown className="h-5 w-5 text-[color:var(--chart-1)]" />;
+    if (rank === 2) return <Medal className="h-5 w-5 text-muted-foreground" />;
+    if (rank === 3) return <Award className="h-5 w-5 text-[color:var(--chart-3)]" />;
+    return <span className="text-muted-foreground font-bold">#{rank}</span>;
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">Global Career Leaderboard</h1>
-          <p className="text-xl text-zinc-600 dark:text-zinc-400">
+          <h1 className="text-4xl font-bold mb-4 text-foreground">Global Career Leaderboard</h1>
+          <p className="text-xl text-muted-foreground">
             Top AI builders ranked by Career Score across all challenges
           </p>
         </div>
 
         {/* Career Score Explanation */}
-        <Card className="mb-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border-blue-200 dark:border-blue-800">
+        <Card className="mb-8 bg-gradient-to-r from-primary/10 to-accent border-primary/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+            <CardTitle className="flex items-center gap-2 text-primary">
               <Trophy className="h-5 w-5" />
               How Career Score Works
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-zinc-700 dark:text-zinc-300">
+            <p className="text-foreground">
               <strong>Career Score</strong> is your cumulative performance across all challenges in the current season. 
               Earn points based on your final scores, and climb the leaderboard to become the top AI builder.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               <div className="text-sm">
-                <strong className="text-blue-700 dark:text-blue-300">Score Calculation:</strong>
-                <p className="text-zinc-600 dark:text-zinc-400">Final Score = 50% LLM + 50% Human Review (when applicable)</p>
+                <strong className="text-primary">Score Calculation:</strong>
+                <p className="text-muted-foreground">Final Score = 50% LLM + 50% Human Review (when applicable)</p>
               </div>
               <div className="text-sm">
-                <strong className="text-blue-700 dark:text-blue-300">Season Format:</strong>
-                <p className="text-zinc-600 dark:text-zinc-400">Scores reset quarterly. Top performers earn badges and recognition.</p>
+                <strong className="text-primary">Season Format:</strong>
+                <p className="text-muted-foreground">Scores reset quarterly. Top performers earn badges and recognition.</p>
               </div>
               <div className="text-sm">
-                <strong className="text-blue-700 dark:text-blue-300">Benefits:</strong>
-                <p className="text-zinc-600 dark:text-zinc-400">Higher rankings increase visibility to sponsors and employers.</p>
+                <strong className="text-primary">Benefits:</strong>
+                <p className="text-muted-foreground">Higher rankings increase visibility to sponsors and employers.</p>
               </div>
             </div>
           </CardContent>
@@ -165,8 +165,8 @@ export default function LeaderboardPage() {
         {/* Leaderboard Table */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
-              <Trophy className="h-6 w-6 text-yellow-500" />
+            <CardTitle className="flex items-center gap-2 text-foreground">
+              <Trophy className="h-6 w-6 text-[color:var(--chart-1)]" />
               Top 10 Builders
             </CardTitle>
           </CardHeader>
@@ -177,12 +177,12 @@ export default function LeaderboardPage() {
                   key={entry.rank}
                   className={`flex items-center gap-4 p-4 rounded-lg border transition-colors ${
                     profile?.username === entry.username
-                      ? 'bg-blue-50 dark:bg-blue-950 border-blue-300 dark:border-blue-700'
-                      : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800'
+                      ? 'bg-primary/10 border-primary/30'
+                      : 'bg-card border-border hover:bg-accent'
                   }`}
                 >
                   {/* Rank */}
-                  <div className="w-12 flex items-center justify-center text-zinc-900 dark:text-zinc-100 font-bold text-lg">
+                  <div className="w-12 flex items-center justify-center text-foreground font-bold text-lg">
                     {getRankIcon(entry.rank)}
                   </div>
 
@@ -196,7 +196,7 @@ export default function LeaderboardPage() {
                   {/* User Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 truncate">
+                      <h3 className="text-lg font-semibold text-foreground truncate">
                         {entry.username}
                       </h3>
                       {profile?.username === entry.username && (
@@ -205,7 +205,7 @@ export default function LeaderboardPage() {
                     </div>
                     <div className="flex flex-wrap gap-2 text-sm">
                       {entry.badges.map((badge, idx) => (
-                        <span key={idx} className="text-zinc-600 dark:text-zinc-400">{badge}</span>
+                        <span key={idx} className="text-muted-foreground">{badge}</span>
                       ))}
                     </div>
                   </div>
@@ -213,23 +213,23 @@ export default function LeaderboardPage() {
                   {/* Stats */}
                   <div className="hidden md:flex items-center gap-6">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{entry.careerScore}</div>
-                      <div className="text-xs text-zinc-600 dark:text-zinc-400">Career Score</div>
+                      <div className="text-2xl font-bold text-foreground">{entry.careerScore}</div>
+                      <div className="text-xs text-muted-foreground">Career Score</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{entry.avgScore}%</div>
-                      <div className="text-xs text-zinc-600 dark:text-zinc-400">Avg Score</div>
+                      <div className="text-lg font-semibold text-foreground">{entry.avgScore}%</div>
+                      <div className="text-xs text-muted-foreground">Avg Score</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{entry.totalSubmissions}</div>
-                      <div className="text-xs text-zinc-600 dark:text-zinc-400">Submissions</div>
+                      <div className="text-lg font-semibold text-foreground">{entry.totalSubmissions}</div>
+                      <div className="text-xs text-muted-foreground">Submissions</div>
                     </div>
                   </div>
 
                   {/* Mobile Stats */}
                   <div className="md:hidden flex flex-col gap-1 text-right">
-                    <div className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{entry.careerScore}</div>
-                    <div className="text-xs text-zinc-600 dark:text-zinc-400">{entry.totalSubmissions} submissions</div>
+                    <div className="text-xl font-bold text-foreground">{entry.careerScore}</div>
+                    <div className="text-xs text-muted-foreground">{entry.totalSubmissions} submissions</div>
                   </div>
                 </div>
               ))}
@@ -248,7 +248,7 @@ export default function LeaderboardPage() {
         </div>
 
         {/* Note */}
-        <div className="text-center mt-8 text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="text-center mt-8 text-sm text-muted-foreground">
           <p>✨ This is a hardcoded preview. Real leaderboard coming soon with live data!</p>
         </div>
       </div>

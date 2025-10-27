@@ -23,21 +23,21 @@ export function GroqChatExample() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 border border-gray-200 rounded-lg shadow-sm">
+    <div className="max-w-2xl mx-auto p-6 border border-border rounded-lg shadow-sm">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Groq AI Chat</h2>
         <button
           onClick={reset}
-          className="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+          className="px-3 py-1 text-sm bg-secondary hover:bg-secondary/80 rounded transition-colors"
         >
           Reset
         </button>
       </div>
 
       {/* Messages */}
-      <div className="space-y-4 mb-4 h-96 overflow-y-auto border border-gray-100 rounded p-4">
+      <div className="space-y-4 mb-4 h-96 overflow-y-auto border border-border rounded p-4">
         {messages.length === 1 && (
-          <p className="text-gray-400 text-center">Start a conversation...</p>
+          <p className="text-muted-foreground text-center">Start a conversation...</p>
         )}
         {messages.slice(1).map((msg, idx) => (
           <div
@@ -49,8 +49,8 @@ export function GroqChatExample() {
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
                 msg.role === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-800'
+                  ? 'bg-primary/100 text-white'
+                  : 'bg-secondary text-foreground'
               }`}
             >
               <p className="text-sm font-semibold mb-1">
@@ -62,11 +62,11 @@ export function GroqChatExample() {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg p-3">
+            <div className="bg-secondary rounded-lg p-3">
               <div className="flex space-x-2">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
               </div>
             </div>
           </div>
@@ -80,14 +80,14 @@ export function GroqChatExample() {
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message... (Enter to send, Shift+Enter for new line)"
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring resize-none"
           rows={2}
           disabled={isLoading}
         />
         <button
           onClick={handleSend}
           disabled={isLoading || !input.trim()}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2 bg-primary/100 text-white rounded-lg hover:bg-primary/90 disabled:bg-secondary disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? 'Sending...' : 'Send'}
         </button>

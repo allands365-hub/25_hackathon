@@ -222,65 +222,65 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
             <div className="space-y-4">
               <div>
                 <Label htmlFor="title">
-                  Challenge Title <span className="text-destructive">*</span>
+                  Challenge Title <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="title"
                   {...register('title')}
                   placeholder="e.g., AI-Powered Customer Support Bot"
-                  className={errors.title ? 'border-destructive' : ''}
+                  className={errors.title ? 'border-red-500' : ''}
                 />
                 {errors.title && (
-                  <p className="text-sm text-destructive mt-1">{errors.title.message}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.title.message}</p>
                 )}
               </div>
 
               <div>
                 <Label htmlFor="description">
-                  Short Description <span className="text-destructive">*</span>
+                  Short Description <span className="text-red-500">*</span>
                 </Label>
                 <Textarea
                   id="description"
                   {...register('description')}
                   placeholder="Brief overview of what builders will create..."
-                  className={`min-h-[80px] ${errors.description ? 'border-destructive' : ''}`}
+                  className={`min-h-[80px] ${errors.description ? 'border-red-500' : ''}`}
                 />
                 {errors.description && (
-                  <p className="text-sm text-destructive mt-1">{errors.description.message}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.description.message}</p>
                 )}
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="difficulty">
-                    Difficulty Level <span className="text-destructive">*</span>
+                    Difficulty Level <span className="text-red-500">*</span>
                   </Label>
                   <select
                     id="difficulty"
                     {...register('difficulty')}
-                    className="w-full px-3 py-2 rounded-md border border-input bg-background"
+                    className="w-full px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
                   >
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
                   </select>
                   {errors.difficulty && (
-                    <p className="text-sm text-destructive mt-1">{errors.difficulty.message}</p>
+                    <p className="text-sm text-red-500 mt-1">{errors.difficulty.message}</p>
                   )}
                 </div>
 
                 <div>
                   <Label htmlFor="deadline">
-                    Deadline <span className="text-destructive">*</span>
+                    Deadline <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="deadline"
                     type="datetime-local"
                     {...register('deadline')}
-                    className={errors.deadline ? 'border-destructive' : ''}
+                    className={errors.deadline ? 'border-red-500' : ''}
                   />
                   {errors.deadline && (
-                    <p className="text-sm text-destructive mt-1">{errors.deadline.message}</p>
+                    <p className="text-sm text-red-500 mt-1">{errors.deadline.message}</p>
                   )}
                 </div>
               </div>
@@ -300,28 +300,28 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
 
             <div>
               <Label htmlFor="problemStatement">
-                Detailed Problem Statement <span className="text-destructive">*</span>
+                Detailed Problem Statement <span className="text-red-500">*</span>
               </Label>
               <Textarea
                 id="problemStatement"
                 {...register('problemStatement')}
                 placeholder="Describe the problem in detail. What should builders create? What are the requirements? What makes a successful solution?"
-                className={`min-h-[300px] ${errors.problemStatement ? 'border-destructive' : ''}`}
+                className={`min-h-[300px] ${errors.problemStatement ? 'border-red-500' : ''}`}
               />
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-zinc-500 mt-1">
                 {watchedValues.problemStatement?.length || 0} characters (minimum 100)
               </p>
               {errors.problemStatement && (
-                <p className="text-sm text-destructive mt-1">{errors.problemStatement.message}</p>
+                <p className="text-sm text-red-500 mt-1">{errors.problemStatement.message}</p>
               )}
             </div>
 
-            <Card className="bg-primary/10 border-primary/20">
+            <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
               <CardContent className="pt-4">
-                <p className="text-sm text-primary">
+                <p className="text-sm text-blue-900 dark:text-blue-100">
                   <strong>Tip:</strong> A good problem statement includes:
                 </p>
-                <ul className="text-sm text-primary mt-2 space-y-1 list-disc list-inside">
+                <ul className="text-sm text-blue-800 dark:text-blue-200 mt-2 space-y-1 list-disc list-inside">
                   <li>Context and background</li>
                   <li>Specific requirements and constraints</li>
                   <li>Success criteria</li>
@@ -355,7 +355,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                           size="sm"
                           onClick={() => remove(index)}
                         >
-                          <Trash2 className="h-4 w-4 text-destructive" />
+                          <Trash2 className="h-4 w-4 text-red-500" />
                         </Button>
                       )}
                     </div>
@@ -399,9 +399,9 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
               ))}
 
               {totalWeight !== 100 && (
-                <div className="flex items-center gap-2 p-3 bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/20 rounded-md">
-                  <AlertCircle className="h-5 w-5 text-[color:var(--warning)]" />
-                  <p className="text-sm text-[color:var(--warning)]">
+                <div className="flex items-center gap-2 p-3 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-md">
+                  <AlertCircle className="h-5 w-5 text-amber-600" />
+                  <p className="text-sm text-amber-900 dark:text-amber-100">
                     Weights must sum to exactly 100%. Current total: {totalWeight}%
                   </p>
                 </div>
@@ -449,7 +449,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                   <select
                     id="prizeCurrency"
                     {...register('prizeCurrency')}
-                    className="w-full px-3 py-2 rounded-md border border-input bg-background"
+                    className="w-full px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -469,7 +469,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                   <Label htmlFor="isPublished" className="cursor-pointer">
                     Publish immediately
                   </Label>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
                     If unchecked, challenge will be saved as draft and can be published later
                   </p>
                 </div>
@@ -482,7 +482,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                 <CardContent className="space-y-3">
                   <div>
                     <p className="text-sm font-medium">Title:</p>
-                    <p className="text-sm text-muted-foreground">{watchedValues.title}</p>
+                    <p className="text-sm text-zinc-600">{watchedValues.title}</p>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Difficulty:</p>
@@ -490,7 +490,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                   </div>
                   <div>
                     <p className="text-sm font-medium">Deadline:</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-zinc-600">
                       {watchedValues.deadline
                         ? new Date(watchedValues.deadline).toLocaleString()
                         : 'Not set'}
@@ -498,14 +498,14 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
                   </div>
                   <div>
                     <p className="text-sm font-medium">Evaluation Criteria:</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-zinc-600">
                       {watchedValues.criteria?.length || 0} criteria (Total: {totalWeight}%)
                     </p>
                   </div>
                   {watchedValues.prizeAmount && watchedValues.prizeAmount > 0 && (
                     <div>
                       <p className="text-sm font-medium">Prize:</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-zinc-600">
                         {watchedValues.prizeCurrency} {watchedValues.prizeAmount}
                       </p>
                     </div>
@@ -531,8 +531,8 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
               <div
                 className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-medium ${
                   currentStep >= step.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary text-secondary-foreground'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
                 }`}
               >
                 {currentStep > step.id ? <CheckCircle className="h-5 w-5" /> : step.id}
@@ -545,7 +545,7 @@ export function ChallengeForm({ mode, initialData, challengeId, onSuccess }: Cha
             {index < STEPS.length - 1 && (
               <div
                 className={`flex-1 h-0.5 mx-4 ${
-                  currentStep > step.id ? 'bg-primary' : 'bg-secondary'
+                  currentStep > step.id ? 'bg-purple-600' : 'bg-gray-200'
                 }`}
               />
             )}

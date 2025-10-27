@@ -20,7 +20,7 @@ export default function NewChallengePage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-600">Loading...</p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
@@ -31,13 +31,13 @@ export default function NewChallengePage() {
       <div className="mb-8">
         <Link
           href="/sponsor/challenges"
-          className="inline-flex items-center text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-4"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
           Back to Challenges
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">Create New Challenge</h1>
-        <p className="text-zinc-600 dark:text-zinc-400 mt-2">
+        <p className="text-muted-foreground mt-2">
           Design a challenge to discover top AI builders
         </p>
       </div>

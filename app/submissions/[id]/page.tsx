@@ -128,7 +128,7 @@ export default function SubmissionDetailPage() {
         );
       case 'scored':
         return (
-          <Badge variant="default" className="flex items-center gap-2 bg-green-600">
+          <Badge variant="default" className="flex items-center gap-2 bg-[color:var(--success)]">
             <CheckCircle className="h-3 w-3" />
             Evaluated
           </Badge>
@@ -160,7 +160,7 @@ export default function SubmissionDetailPage() {
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-          <p className="text-zinc-600">Loading submission...</p>
+          <p className="text-muted-foreground">Loading submission...</p>
         </div>
       </div>
     );
@@ -168,16 +168,16 @@ export default function SubmissionDetailPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+      <div className="min-h-screen bg-background py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <Card className="p-8 text-center">
             <CardHeader>
-              <CardTitle className="text-2xl text-red-600 mb-4">
+              <CardTitle className="text-2xl text-destructive mb-4">
                 {error === 'Submission not found' ? '404' : '403'}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-zinc-600 mb-6">
+              <p className="text-muted-foreground mb-6">
                 {error === 'Submission not found' 
                   ? 'This submission could not be found.' 
                   : 'You do not have permission to view this submission.'
@@ -201,7 +201,7 @@ export default function SubmissionDetailPage() {
   const videoEmbedUrl = getVideoEmbedUrl(submission.video_url);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -212,7 +212,7 @@ export default function SubmissionDetailPage() {
                 <Badge variant="secondary" className="ml-3">Your Submission</Badge>
               )}
             </h1>
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-muted-foreground">
               Submitted on {new Date(submission.created_at).toLocaleDateString()}
             </p>
           </div>
@@ -244,12 +244,12 @@ export default function SubmissionDetailPage() {
             <h3 className="text-xl font-semibold mb-2">
               <button
                 onClick={() => router.push(`/challenges/${submission.challenge_id}`)}
-                className="text-blue-600 hover:underline"
+                className="text-primary hover:underline"
               >
                 {submission.challenge.title}
               </button>
             </h3>
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-muted-foreground">
               {submission.challenge.description}
             </p>
           </CardContent>
@@ -271,7 +271,7 @@ export default function SubmissionDetailPage() {
                 href={submission.repo_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline flex items-center gap-2"
+                className="text-primary hover:underline flex items-center gap-2"
               >
                 {submission.repo_url}
                 <ExternalLink className="h-3 w-3" />
@@ -288,7 +288,7 @@ export default function SubmissionDetailPage() {
                 href={submission.deck_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:underline flex items-center gap-2"
+                className="text-primary hover:underline flex items-center gap-2"
               >
                 {submission.deck_url}
                 <ExternalLink className="h-3 w-3" />
@@ -306,7 +306,7 @@ export default function SubmissionDetailPage() {
                   href={submission.video_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline flex items-center gap-2"
+                  className="text-primary hover:underline flex items-center gap-2"
                 >
                   {submission.video_url}
                   <ExternalLink className="h-3 w-3" />
@@ -330,8 +330,8 @@ export default function SubmissionDetailPage() {
             {/* Summary */}
             <div>
               <label className="text-sm font-medium mb-2 block">Project Summary</label>
-              <div className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg">
-                <p className="whitespace-pre-wrap break-words overflow-hidden text-zinc-700 dark:text-zinc-300">
+              <div className="bg-secondary p-4 rounded-lg">
+                <p className="whitespace-pre-wrap break-words overflow-hidden text-foreground">
                   {submission.summary}
                 </p>
               </div>
@@ -351,10 +351,10 @@ export default function SubmissionDetailPage() {
             <CardContent className="space-y-6">
               {/* Overall Score */}
               <div className="text-center">
-                <div className="text-6xl font-bold text-green-600 mb-2">
+                <div className="text-6xl font-bold text-[color:var(--success)] mb-2">
                   {submission.evaluation.score}/100
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400">
+                <p className="text-muted-foreground">
                   Overall Score
                 </p>
               </div>
@@ -370,13 +370,13 @@ export default function SubmissionDetailPage() {
                           <span className="font-medium capitalize">
                             {criterion.replace(/_/g, ' ')}
                           </span>
-                          <span className="text-sm text-zinc-600">
+                          <span className="text-sm text-muted-foreground">
                             {score}/100
                           </span>
                         </div>
-                        <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2">
+                        <div className="w-full bg-secondary rounded-full h-2">
                           <div
-                            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                            className="bg-primary h-2 rounded-full transition-all duration-300"
                             style={{ width: `${score}%` }}
                           />
                         </div>
@@ -389,14 +389,14 @@ export default function SubmissionDetailPage() {
               {/* Feedback */}
               <div>
                 <h4 className="text-lg font-semibold mb-4">Feedback</h4>
-                <blockquote className="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg border-l-4 border-blue-500">
-                  <p className="whitespace-pre-wrap text-zinc-700 dark:text-zinc-300">
+                <blockquote className="bg-secondary p-4 rounded-lg border-l-4 border-primary">
+                  <p className="whitespace-pre-wrap text-foreground">
                     {submission.evaluation.feedback}
                   </p>
                 </blockquote>
               </div>
 
-              <div className="text-sm text-zinc-500 text-center">
+              <div className="text-sm text-muted-foreground text-center">
                 Evaluated on {new Date(submission.evaluation.evaluated_at).toLocaleString()}
               </div>
             </CardContent>
@@ -411,23 +411,23 @@ export default function SubmissionDetailPage() {
               <div className="space-y-4">
                 {submission.status === 'pending' && (
                   <>
-                    <Clock className="h-12 w-12 text-blue-500 mx-auto" />
+                    <Clock className="h-12 w-12 text-primary mx-auto" />
                     <h3 className="text-xl font-semibold">Queued for Evaluation</h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
+                    <p className="text-muted-foreground">
                       Your submission is in the evaluation queue. This typically takes less than 30 seconds.
                     </p>
                   </>
                 )}
                 {submission.status === 'evaluating' && (
                   <>
-                    <Loader2 className="h-12 w-12 text-blue-500 mx-auto animate-spin" />
+                    <Loader2 className="h-12 w-12 text-primary mx-auto animate-spin" />
                     <h3 className="text-xl font-semibold">Evaluating Your Project</h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
+                    <p className="text-muted-foreground">
                       Our AI is analyzing your submission. This typically takes less than 30 seconds.
                     </p>
                   </>
                 )}
-                <p className="text-sm text-zinc-500">
+                <p className="text-sm text-muted-foreground">
                   Refresh the page to see the latest status and results.
                 </p>
               </div>

@@ -130,10 +130,10 @@ export default function PublicProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-zinc-600 dark:text-zinc-400">Loading profile...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading profile...</p>
         </div>
       </div>
     );
@@ -141,17 +141,17 @@ export default function PublicProfilePage() {
 
   if (error || !profile) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="max-w-md w-full p-8">
           <div className="text-center space-y-4">
-            <Eye className="h-12 w-12 text-zinc-400 mx-auto" />
+            <Eye className="h-12 w-12 text-muted-foreground mx-auto" />
             <h2 className="text-2xl font-bold">Profile Not Found</h2>
-            <p className="text-zinc-600 dark:text-zinc-400">
+            <p className="text-muted-foreground">
               This profile doesn't exist or has been removed.
             </p>
             <button
               onClick={() => router.push('/challenges')}
-              className="text-blue-600 hover:underline"
+              className="text-primary hover:underline"
             >
               Return to Challenges
             </button>
@@ -170,7 +170,7 @@ export default function PublicProfilePage() {
   const highestScore = Math.max(...submissions.map(s => s.evaluation?.score || 0), 0);
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Profile Header */}
         <Card className="mb-8">
@@ -187,8 +187,8 @@ export default function PublicProfilePage() {
                     className="rounded-full"
                   />
                 ) : (
-                  <div className="w-30 h-30 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-zinc-600">
+                  <div className="w-30 h-30 rounded-full bg-secondary flex items-center justify-center">
+                    <span className="text-4xl font-bold text-muted-foreground">
                       {profile.username[0].toUpperCase()}
                     </span>
                   </div>
@@ -201,7 +201,7 @@ export default function PublicProfilePage() {
                   <div>
                     <h1 className="text-3xl font-bold mb-2">{profile.username}</h1>
                     {profile.company_name && (
-                      <p className="text-lg text-zinc-600 dark:text-zinc-400">
+                      <p className="text-lg text-muted-foreground">
                         {profile.company_name}
                       </p>
                     )}
@@ -220,7 +220,7 @@ export default function PublicProfilePage() {
                       href={profile.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Github className="h-5 w-5" />
                       <span>GitHub</span>
@@ -232,7 +232,7 @@ export default function PublicProfilePage() {
                       href={profile.linkedin_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Linkedin className="h-5 w-5" />
                       <span>LinkedIn</span>
@@ -244,7 +244,7 @@ export default function PublicProfilePage() {
                       href={profile.portfolio_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Globe className="h-5 w-5" />
                       <span>Portfolio</span>
@@ -256,7 +256,7 @@ export default function PublicProfilePage() {
                       href={profile.cv_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <FileText className="h-5 w-5" />
                       <span>CV</span>
@@ -268,7 +268,7 @@ export default function PublicProfilePage() {
                       href={profile.website_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Globe className="h-5 w-5" />
                       <span>Website</span>
@@ -280,7 +280,7 @@ export default function PublicProfilePage() {
                       href={profile.twitter_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <Twitter className="h-5 w-5" />
                       <span>Twitter</span>
@@ -291,28 +291,28 @@ export default function PublicProfilePage() {
 
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4 mt-6">
-                  <div className="text-center p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">{totalSubmissions}</div>
-                    <div className="text-sm text-zinc-600 dark:text-zinc-400">Submissions</div>
+                  <div className="text-center p-4 bg-secondary rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{totalSubmissions}</div>
+                    <div className="text-sm text-muted-foreground">Submissions</div>
                   </div>
                   {averageScore > 0 && (
-                    <div className="text-center p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">{Math.round(averageScore)}</div>
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400">Avg Score</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <div className="text-2xl font-bold text-[color:var(--success)]">{Math.round(averageScore)}</div>
+                      <div className="text-sm text-muted-foreground">Avg Score</div>
                     </div>
                   )}
                   {highestScore > 0 && (
-                    <div className="text-center p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg">
-                      <div className="text-2xl font-bold text-purple-600">{highestScore}</div>
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400">Best Score</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <div className="text-2xl font-bold text-accent-foreground">{highestScore}</div>
+                      <div className="text-sm text-muted-foreground">Best Score</div>
                     </div>
                   )}
                 </div>
 
                 {/* Bio */}
                 {profile.bio && (
-                  <div className="mt-4 p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg">
-                    <p className="text-zinc-700 dark:text-zinc-300">{profile.bio}</p>
+                  <div className="mt-4 p-4 bg-background rounded-lg">
+                    <p className="text-foreground">{profile.bio}</p>
                   </div>
                 )}
 
@@ -331,7 +331,7 @@ export default function PublicProfilePage() {
                 )}
 
                 {/* Additional Info */}
-                <div className="mt-4 space-y-2 text-sm text-zinc-500">
+                <div className="mt-4 space-y-2 text-sm text-muted-foreground">
                   {profile.location && (
                     <div className="flex items-center gap-2">
                       <MapPin className="h-4 w-4" />
@@ -351,9 +351,9 @@ export default function PublicProfilePage() {
                   {profile.availability_status && (
                     <div className="flex items-center gap-2">
                       <div className={`w-2 h-2 rounded-full ${
-                        profile.availability_status === 'available' ? 'bg-green-500' :
-                        profile.availability_status === 'busy' ? 'bg-yellow-500' :
-                        'bg-red-500'
+                        profile.availability_status === 'available' ? 'bg-[color:var(--success)]/100' :
+                        profile.availability_status === 'busy' ? 'bg-[color:var(--warning)]/100' :
+                        'bg-destructive/100'
                       }`} />
                       <span className="capitalize">{profile.availability_status.replace('_', ' ')}</span>
                     </div>
@@ -369,9 +369,9 @@ export default function PublicProfilePage() {
           <h2 className="text-2xl font-bold mb-4">Recent Submissions</h2>
           {submissions.length === 0 ? (
             <Card className="p-12 text-center">
-              <Code className="h-12 w-12 text-zinc-400 mx-auto mb-4" />
+              <Code className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">No submissions yet</h3>
-              <p className="text-zinc-600 dark:text-zinc-400">
+              <p className="text-muted-foreground">
                 This user hasn't submitted any projects yet.
               </p>
             </Card>
@@ -391,10 +391,10 @@ export default function PublicProfilePage() {
                             {submission.challenge.difficulty}
                           </Badge>
                         </div>
-                        <p className="text-zinc-600 dark:text-zinc-400 mb-3 line-clamp-2">
+                        <p className="text-muted-foreground mb-3 line-clamp-2">
                           {submission.summary}
                         </p>
-                        <div className="flex gap-4 text-sm text-zinc-500">
+                        <div className="flex gap-4 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             {new Date(submission.created_at).toLocaleDateString()}
@@ -407,10 +407,10 @@ export default function PublicProfilePage() {
                       </div>
                       {submission.evaluation && (
                         <div className="text-right">
-                          <div className="text-3xl font-bold text-blue-600">
+                          <div className="text-3xl font-bold text-primary">
                             {submission.evaluation.score}
                           </div>
-                          <p className="text-sm text-zinc-600">Score</p>
+                          <p className="text-sm text-muted-foreground">Score</p>
                         </div>
                       )}
                     </div>
@@ -419,7 +419,7 @@ export default function PublicProfilePage() {
                         href={submission.repo_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-600 hover:underline"
+                        className="flex items-center gap-2 text-primary hover:underline"
                       >
                         <Github className="h-4 w-4" />
                         View Repository

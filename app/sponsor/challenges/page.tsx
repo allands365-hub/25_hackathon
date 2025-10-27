@@ -164,13 +164,13 @@ export default function SponsorshallengesPage() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'Beginner':
-        return 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300';
+        return 'bg-[color:var(--success)]/10 text-[color:var(--success)]';
       case 'Intermediate':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300';
+        return 'bg-[color:var(--warning)]/10 text-[color:var(--warning)]';
       case 'Advanced':
-        return 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300';
+        return 'bg-destructive/10 text-destructive';
       default:
-        return 'bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300';
+        return 'bg-secondary text-foreground';
     }
   };
 
@@ -193,7 +193,7 @@ export default function SponsorshallengesPage() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">My Challenges</h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Manage your AI product challenges
           </p>
         </div>
@@ -211,12 +211,12 @@ export default function SponsorshallengesPage() {
           <CardContent>
             <div className="max-w-md mx-auto">
               <div className="p-6 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-                <Plus className="h-12 w-12 text-purple-600 dark:text-purple-400" />
+                <Plus className="h-12 w-12 text-accent-foreground" />
               </div>
               <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 Start Discovering Talent
               </h3>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+              <p className="text-muted-foreground mb-8">
                 Create your first challenge to start discovering top AI builders and building your team
               </p>
               <Button asChild size="lg" className="transition-all hover:scale-105">
@@ -258,7 +258,7 @@ export default function SponsorshallengesPage() {
                           </Badge>
                         )}
                       </div>
-                      <p className="text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                      <p className="text-muted-foreground line-clamp-2">
                         {challenge.description}
                       </p>
                     </div>
@@ -267,20 +267,20 @@ export default function SponsorshallengesPage() {
                 <CardContent>
                   <div className="flex flex-wrap gap-6 mb-4">
                     <div className="flex items-center gap-2 text-sm">
-                      <Calendar className="h-4 w-4 text-zinc-500" />
-                      <span className={isExpired ? 'text-red-600' : ''}>
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <span className={isExpired ? 'text-destructive' : ''}>
                         {isExpired
                           ? 'Expired'
                           : `${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} remaining`}
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
-                      <Users className="h-4 w-4 text-zinc-500" />
+                      <Users className="h-4 w-4 text-muted-foreground" />
                       <span>{challenge.submission_count} submissions</span>
                     </div>
                     {challenge.prize_amount > 0 && (
                       <div className="flex items-center gap-2 text-sm">
-                        <DollarSign className="h-4 w-4 text-zinc-500" />
+                        <DollarSign className="h-4 w-4 text-muted-foreground" />
                         <span>
                           {challenge.prize_currency} {challenge.prize_amount}
                         </span>
@@ -322,7 +322,7 @@ export default function SponsorshallengesPage() {
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(challenge.id)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-destructive hover:text-destructive/80"
                     >
                       <Trash2 className="h-4 w-4 mr-1" />
                       Delete

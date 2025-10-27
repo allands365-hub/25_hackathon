@@ -81,7 +81,7 @@ export default function SponsorProfilePage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-600">Loading...</p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
@@ -91,11 +91,11 @@ export default function SponsorProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black py-12 px-4">
+    <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Company Profile</h1>
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-muted-foreground">
             Manage your company information and branding
           </p>
         </div>
@@ -119,7 +119,7 @@ export default function SponsorProfilePage() {
                 placeholder="https://yourcompany.com/logo.png"
                 type="url"
               />
-              <p className="text-xs text-zinc-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Add a link to your company logo image
               </p>
               <div className="mt-3">
@@ -129,13 +129,13 @@ export default function SponsorProfilePage() {
                     alt="Company Logo"
                     width={120}
                     height={120}
-                    className="rounded-lg border border-zinc-200 dark:border-zinc-700"
+                    className="rounded-lg border border-border"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
                 ) : companyName ? (
-                  <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg border border-zinc-200 dark:border-zinc-700" style={{ width: '120px', height: '120px' }}>
+                  <div className="w-30 h-30 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg border border-border" style={{ width: '120px', height: '120px' }}>
                     <span className="text-4xl font-bold text-white">
                       {companyName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()}
                     </span>
@@ -147,7 +147,7 @@ export default function SponsorProfilePage() {
             {/* Company Name */}
             <div>
               <label className="text-sm font-medium mb-2 block">
-                Company Name <span className="text-red-500">*</span>
+                Company Name <span className="text-destructive">*</span>
               </label>
               <Input
                 value={companyName}
@@ -165,9 +165,9 @@ export default function SponsorProfilePage() {
               <Input
                 value={companyEmail}
                 disabled
-                className="bg-zinc-100 dark:bg-zinc-800"
+                className="bg-secondary"
               />
-              <p className="text-xs text-zinc-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Your email address (cannot be changed here)
               </p>
             </div>
@@ -188,7 +188,7 @@ export default function SponsorProfilePage() {
                   href={companyWebsite}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline text-sm flex items-center gap-1 mt-2"
+                  className="text-primary hover:underline text-sm flex items-center gap-1 mt-2"
                 >
                   <Globe className="h-4 w-4" />
                   Visit Website
@@ -208,13 +208,13 @@ export default function SponsorProfilePage() {
                 placeholder="Tell us about your company, its mission, and what makes it unique..."
                 rows={6}
               />
-              <p className="text-xs text-zinc-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 Brief introduction about your company that will be visible on challenge pages
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="flex gap-4 pt-4 border-t border-border">
               <Button
                 onClick={handleUpdateProfile}
                 disabled={isSaving || !companyName.trim()}
@@ -240,13 +240,13 @@ export default function SponsorProfilePage() {
                   alt={companyName}
                   width={80}
                   height={80}
-                  className="rounded-lg border border-zinc-200 dark:border-zinc-700"
+                  className="rounded-lg border border-border"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
               ) : (
-                <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg border border-border">
                   <span className="text-2xl font-bold text-white">
                     {companyName.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()}
                   </span>
@@ -255,7 +255,7 @@ export default function SponsorProfilePage() {
               <div className="flex-1">
                 <h3 className="text-xl font-bold mb-1">{companyName}</h3>
                 {companyIntro && (
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+                  <p className="text-muted-foreground text-sm">
                     {companyIntro}
                   </p>
                 )}
@@ -264,7 +264,7 @@ export default function SponsorProfilePage() {
                     href={companyWebsite}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline text-sm flex items-center gap-1 mt-2"
+                    className="text-primary hover:underline text-sm flex items-center gap-1 mt-2"
                   >
                     <Globe className="h-4 w-4" />
                     {companyWebsite}
@@ -272,7 +272,7 @@ export default function SponsorProfilePage() {
                   </a>
                 )}
                 {companyEmail && (
-                  <div className="flex items-center gap-1 text-sm text-zinc-500 mt-2">
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground mt-2">
                     <Mail className="h-4 w-4" />
                     {companyEmail}
                   </div>

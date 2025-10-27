@@ -177,13 +177,13 @@ export default function ReviewSubmissionPage() {
       <div className="mb-8">
         <Link
           href={`/sponsor/challenges/${challengeId}`}
-          className="inline-flex items-center text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-4"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
           Back to Challenge
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">Review Submission</h1>
-        <p className="text-zinc-600 dark:text-zinc-400 mt-1">
+        <p className="text-muted-foreground mt-1">
           Challenge: {submission.challenge.title}
         </p>
       </div>
@@ -202,7 +202,7 @@ export default function ReviewSubmissionPage() {
                 />
                 <div>
                   <p className="text-lg">{submission.user.username}</p>
-                  <p className="text-sm text-zinc-500 font-normal">
+                  <p className="text-sm text-muted-foreground font-normal">
                     Submitted {new Date(submission.created_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -268,7 +268,7 @@ export default function ReviewSubmissionPage() {
               <CardTitle>Project Summary</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap break-words overflow-hidden">
+              <p className="text-foreground whitespace-pre-wrap break-words overflow-hidden">
                 {submission.summary}
               </p>
             </CardContent>
@@ -276,14 +276,14 @@ export default function ReviewSubmissionPage() {
 
           {/* LLM Evaluation */}
           {submission.evaluation && (
-            <Card className="border-blue-200 dark:border-blue-800">
+            <Card className="border-primary/20">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Brain className="h-5 w-5 text-blue-600" />
+                    <Brain className="h-5 w-5 text-primary" />
                     <CardTitle>AI Evaluation</CardTitle>
                   </div>
-                  <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">
+                  <Badge className="bg-primary/20 text-primary">
                     LLM Score: {submission.evaluation.score}/100
                   </Badge>
                 </div>
@@ -294,7 +294,7 @@ export default function ReviewSubmissionPage() {
                   <p className="text-sm font-medium">Criterion Scores:</p>
                   {Object.entries(submission.evaluation.criterion_scores).map(([name, score]) => (
                     <div key={name} className="flex items-center justify-between text-sm">
-                      <span className="text-zinc-600 dark:text-zinc-400">{name}</span>
+                      <span className="text-muted-foreground">{name}</span>
                       <span className="font-medium">{score}/100</span>
                     </div>
                   ))}
@@ -303,8 +303,8 @@ export default function ReviewSubmissionPage() {
                 {/* Feedback */}
                 <div>
                   <p className="text-sm font-medium mb-2">AI Feedback:</p>
-                  <div className="bg-zinc-50 dark:bg-zinc-900 p-4 rounded-md">
-                    <p className="text-sm text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap">
+                  <div className="bg-background p-4 rounded-md">
+                    <p className="text-sm text-foreground whitespace-pre-wrap">
                       {submission.evaluation.feedback}
                     </p>
                   </div>
@@ -315,20 +315,20 @@ export default function ReviewSubmissionPage() {
 
           {/* Hybrid Score Display */}
           {hybridScore !== null && (
-            <Card className="border-purple-200 dark:border-purple-800 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950 dark:to-blue-950">
+            <Card className="border-accent bg-gradient-to-r from-accent to-primary/10">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-purple-600" />
+                    <TrendingUp className="h-5 w-5 text-accent-foreground" />
                     <CardTitle>Hybrid Score</CardTitle>
                   </div>
-                  <Badge className="text-lg px-4 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-100">
+                  <Badge className="text-lg px-4 py-1 bg-accent text-accent-foreground">
                     {hybridScore}/100
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-purple-900 dark:text-purple-100">
+                <p className="text-sm text-accent-foreground">
                   50% AI ({submission.evaluation?.score}) + 50% Human ({submission.manual_review?.score}) = <strong>{hybridScore}</strong>
                 </p>
               </CardContent>
@@ -341,12 +341,12 @@ export default function ReviewSubmissionPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
-                <Star className="h-5 w-5 text-yellow-600" />
+                <Star className="h-5 w-5 text-[color:var(--warning)]" />
                 <CardTitle>
                   {submission.manual_review ? 'Your Review' : 'Manual Review'}
                 </CardTitle>
               </div>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm text-muted-foreground">
                 {submission.manual_review
                   ? 'Update your evaluation scores and feedback'
                   : 'Evaluate this submission against the challenge criteria'}

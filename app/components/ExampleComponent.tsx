@@ -10,13 +10,13 @@ export function ExampleComponent({ title = 'Example Component' }: ExampleCompone
   const [count, setCount] = useState(0);
 
   return (
-    <div className="p-6 border border-gray-200 rounded-lg shadow-sm">
+    <div className="p-6 border border-border rounded-lg shadow-sm">
       <h2 className="text-2xl font-bold mb-4">{title}</h2>
       <div className="space-y-4">
-        <p className="text-gray-600">Count: {count}</p>
+        <p className="text-muted-foreground">Count: {count}</p>
         <button
           onClick={() => setCount(count + 1)}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          className="px-4 py-2 bg-primary/100 text-white rounded hover:bg-primary/90 transition-colors"
         >
           Increment
         </button>
