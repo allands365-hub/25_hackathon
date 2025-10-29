@@ -6,13 +6,46 @@ export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
   const role = requestUrl.searchParams.get('role'); // Get role from URL params
-  const origin = requestUrl.origin;
+  
+  // Get the correct origin - prefer environment variable or request headers, fallback to request origin
+  let origin = requestUrl.origin;
+  
+  // Check for environment variable first (for production)
+  if (process.env.NEXT_PUBLIC_BASE_URL) {
+    try {
+      const envUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL);
+      origin = envUrl.origin;
+    } catch (e) {
+      console.warn('[AUTH CALLBACK] Invalid NEXT_PUBLIC_BASE_URL, using request origin');
+    }
+  }
+  
+  // Check request headers for correct origin (handles proxies/load balancers)
+  const forwardedHost = request.headers.get('x-forwarded-host');
+  const forwardedProto = request.headers.get('x-forwarded-proto') || 'https';
+  
+  if (forwardedHost && !forwardedHost.includes('0.0.0.0') && !forwardedHost.includes('localhost')) {
+    origin = `${forwardedProto}://${forwardedHost}`;
+  }
+  
+  // Ensure we never use 0.0.0.0 or localhost in production
+  if (origin.includes('0.0.0.0') || (origin.includes('localhost') && process.env.NODE_ENV === 'production')) {
+    console.error('[AUTH CALLBACK] Invalid origin detected, using environment variable or default');
+    if (process.env.NEXT_PUBLIC_SITE_URL) {
+      origin = process.env.NEXT_PUBLIC_SITE_URL;
+    } else {
+      // Fallback to classly.space for production
+      origin = 'https://classly.space';
+    }
+  }
 
   console.log('[AUTH CALLBACK] Request received:', {
     url: request.url,
     origin,
     code: !!code,
     role,
+    forwardedHost,
+    envBaseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   });
 
   if (code) {
