@@ -7,8 +7,20 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get('code');
   const role = requestUrl.searchParams.get('role'); // Get role from URL params
   
+  // Immediately log the incoming request URL to debug
+  console.log('[AUTH CALLBACK] Incoming request URL:', request.url);
+  console.log('[AUTH CALLBACK] Parsed origin:', requestUrl.origin);
+  
   // Get the correct origin - prefer environment variable or request headers, fallback to request origin
   let origin = requestUrl.origin;
+  
+  // Immediately check if the parsed origin is invalid
+  if (requestUrl.origin.includes('0.0.0.0')) {
+    console.error('[AUTH CALLBACK] CRITICAL: requestUrl.origin contains 0.0.0.0!', {
+      requestUrl: request.url,
+      parsedOrigin: requestUrl.origin
+    });
+  }
   
   // Check for environment variable first (for production)
   if (process.env.NEXT_PUBLIC_BASE_URL) {
@@ -28,13 +40,35 @@ export async function GET(request: Request) {
     origin = `${forwardedProto}://${forwardedHost}`;
   }
   
-  // Ensure we never use 0.0.0.0 or localhost in production
-  if (origin.includes('0.0.0.0') || (origin.includes('localhost') && process.env.NODE_ENV === 'production')) {
-    console.error('[AUTH CALLBACK] Invalid origin detected, using environment variable or default');
-    if (process.env.NEXT_PUBLIC_SITE_URL) {
+  // Ensure we never use 0.0.0.0 - always block it regardless of environment
+  if (origin.includes('0.0.0.0')) {
+    console.error('[AUTH CALLBACK] Invalid origin detected (0.0.0.0), using environment variable or default');
+    if (process.env.NEXT_PUBLIC_BASE_URL) {
+      try {
+        const envUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL);
+        origin = envUrl.origin;
+      } catch (e) {
+        origin = 'https://classly.space';
+      }
+    } else if (process.env.NEXT_PUBLIC_SITE_URL) {
       origin = process.env.NEXT_PUBLIC_SITE_URL;
     } else {
-      // Fallback to classly.space for production
+      // Fallback to classly.space
+      origin = 'https://classly.space';
+    }
+  }
+  
+  // Block localhost in production
+  if (origin.includes('localhost') && process.env.NODE_ENV === 'production') {
+    console.error('[AUTH CALLBACK] Invalid origin detected (localhost in production), using environment variable or default');
+    if (process.env.NEXT_PUBLIC_BASE_URL) {
+      try {
+        const envUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL);
+        origin = envUrl.origin;
+      } catch (e) {
+        origin = 'https://classly.space';
+      }
+    } else {
       origin = 'https://classly.space';
     }
   }
