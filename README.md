@@ -1,8 +1,8 @@
-# Classly - Hackathon Challenge Platform
+# BuildAI Arena - Prove Your AI Skills. Get Hired.
 
-> A platform connecting sponsors with builders through coding challenges. Built in 48 hours.
+> A platform connecting sponsors with AI builders through coding challenges. Built in 48 hours.
 
-![Classly Screenshot](./docs/screenshot.png)
+![BuildAI Arena Screenshot](./docs/screenshot.png)
 
 ## Live Demo
 
@@ -12,11 +12,11 @@
 
 ## What It Does
 
-Classly is a two-sided platform:
-- **Sponsors** create coding challenges with prizes
+BuildAI Arena is a two-sided platform:
+- **Sponsors** create AI coding challenges with prizes
 - **Builders** compete, submit solutions, and climb the leaderboard
 
-Think of it as a hackathon-in-a-box — sponsors get talent discovery, builders get opportunities.
+Think of it as a hackathon-in-a-box — sponsors get talent discovery, builders prove their AI skills and get hired.
 
 ---
 
@@ -39,7 +39,7 @@ Think of it as a hackathon-in-a-box — sponsors get talent discovery, builders 
 ## Features
 
 ### For Builders
-- Browse and filter challenges
+- Browse and filter AI challenges
 - Submit solutions with live preview
 - Track position on leaderboard
 - Profile with submission history
@@ -48,7 +48,7 @@ Think of it as a hackathon-in-a-box — sponsors get talent discovery, builders 
 - Create challenges with custom requirements
 - Set prize pools and deadlines
 - Review submissions in dashboard
-- Manage participant engagement
+- Discover and hire AI talent
 
 ### UX Details I'm Proud Of
 - **Smart redirects** — authenticated users go straight to their dashboard
